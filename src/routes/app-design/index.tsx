@@ -1,11 +1,11 @@
 import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import desktopDecoration from "../../assets/app-design/desktop/bg-pattern-intro-app.svg";
-import projetImage1 from "../../assets/app-design/desktop/image-airfilter.jpg";
-import projetImage2 from "../../assets/app-design/desktop/image-eyecam.jpg";
-import projetImage3 from "../../assets/app-design/desktop/image-faceit.jpg";
-import projetImage5 from "../../assets/app-design/desktop/image-loopstudios.jpg";
-import projetImage4 from "../../assets/app-design/desktop/image-todo.jpg";
+import projetImage1 from "../../assets/app-design/desktop/image-airfilter.webp";
+import projetImage2 from "../../assets/app-design/desktop/image-eyecam.webp";
+import projetImage3 from "../../assets/app-design/desktop/image-faceit.webp";
+import projetImage5 from "../../assets/app-design/desktop/image-loopstudios.webp";
+import projetImage4 from "../../assets/app-design/desktop/image-todo.webp";
 import { DesignPageHero, preloads } from "../../components/design-page-hero";
 import { ProjectsShowcaseSection } from "../../components/projects-showcase-section";
 import { ServicesSection } from "../../components/services-section";

@@ -1,9 +1,9 @@
 import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import desktopDecoration from "../../assets/graphic-design/desktop/bg-pattern-intro-graphic.svg";
-import projectImage2 from "../../assets/graphic-design/desktop/image-boxed-water.jpg";
-import projectImage1 from "../../assets/graphic-design/desktop/image-change.jpg";
-import projectImage3 from "../../assets/graphic-design/desktop/image-science.jpg";
+import projectImage2 from "../../assets/graphic-design/desktop/image-boxed-water.webp";
+import projectImage1 from "../../assets/graphic-design/desktop/image-change.webp";
+import projectImage3 from "../../assets/graphic-design/desktop/image-science.webp";
 import { DesignPageHero, preloads } from "../../components/design-page-hero";
 import { ProjectsShowcaseSection } from "../../components/projects-showcase-section";
 import { ServicesSection } from "../../components/services-section";

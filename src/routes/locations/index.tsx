@@ -1,12 +1,12 @@
 import { component$ } from "@builder.io/qwik";
 import { DocumentHead } from "@builder.io/qwik-city";
 import clsx from "clsx";
-import auOfficeMapSquare from "../../assets/locations/desktop/image-map-australia.png";
-import caOfficeMapSquare from "../../assets/locations/desktop/image-map-canada.png";
-import ukOfficeMapSquare from "../../assets/locations/desktop/image-map-united-kingdom.png";
-import auOfficeMapRect from "../../assets/locations/tablet/image-map-australia.png";
-import caOfficeMapRect from "../../assets/locations/tablet/image-map-canada.png";
-import ukOfficeMapRect from "../../assets/locations/tablet/image-map-united-kingdom.png";
+import auOfficeMapSquare from "../../assets/locations/desktop/image-map-australia.webp";
+import caOfficeMapSquare from "../../assets/locations/desktop/image-map-canada.webp";
+import ukOfficeMapSquare from "../../assets/locations/desktop/image-map-united-kingdom.webp";
+import auOfficeMapRect from "../../assets/locations/tablet/image-map-australia.webp";
+import caOfficeMapRect from "../../assets/locations/tablet/image-map-canada.webp";
+import ukOfficeMapRect from "../../assets/locations/tablet/image-map-united-kingdom.webp";
 import bgPattern from "../../assets/shared/desktop/bg-pattern-three-circles.svg";
 import { Section } from "../../components/section";
 
