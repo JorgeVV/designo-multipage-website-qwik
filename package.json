@@ -1,0 +1,55 @@
+{
+  "name": "designo-multipage-website",
+  "description": "File based routing and MDX support Vite.js tooling. Netlify Edge Functions. Prettier code formatter. Tailwind CSS framework.",
+  "scripts": {
+    "build": "npm run typecheck && npm run build.client && npm run build.ssr",
+    "build.client": "vite build",
+    "build.ssr": "vite build --ssr src/entry.netlify.ts",
+    "dev": "npm run dev.ssr",
+    "dev.client": "vite",
+    "dev.debug": "node --inspect-brk node_modules/vite/bin/vite.js --force --mode ssr",
+    "dev.ssr": "node --inspect node_modules/vite/bin/vite.js --mode ssr",
+    "fmt": "prettier --write .",
+    "fmt.check": "prettier --check .",
+    "lint": "eslint \"src/**/*.ts*\"",
+    "serve": "netlify dev",
+    "start": "npm run dev",
+    "typecheck": "tsc --incremental --noEmit"
+  },
+  "devDependencies": {
+    "@builder.io/qwik": "^0.0.108",
+    "@builder.io/qwik-city": "^0.0.109",
+    "@netlify/vite-plugin-netlify-edge": "1.1.0",
+    "@tailwindcss/forms": "^0.5.3",
+    "@types/body-scroll-lock": "^3.1.0",
+    "@types/eslint": "8.4.6",
+    "@types/node": "latest",
+    "@typescript-eslint/eslint-plugin": "^5.36.2",
+    "@typescript-eslint/parser": "^5.36.2",
+    "autoprefixer": "^10.4.8",
+    "eslint": "^8.23.0",
+    "eslint-plugin-qwik": "^0.0.108",
+    "node-fetch": "3.2.10",
+    "postcss": "^8.4.16",
+    "postcss-hover-media-feature": "^1.0.2",
+    "prettier": "2.7.1",
+    "tailwindcss": "^3.1.8",
+    "tailwindcss-logical": "^3.0.0",
+    "tailwindcss-skip-link": "^1.0.1",
+    "typescript": "^4.8.2",
+    "vite": "^3.1.0",
+    "vite-tsconfig-paths": "3.5.0"
+  },
+  "engines": {
+    "node": "^14.18.0 || >=16.0.0"
+  },
+  "homepage": "https://qwik.builder.io/",
+  "license": "",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "body-scroll-lock": "^4.0.0-beta.0",
+    "clsx": "^1.2.1",
+    "focus-lock": "^0.11.2"
+  }
+}
