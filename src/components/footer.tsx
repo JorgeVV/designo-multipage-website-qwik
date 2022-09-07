@@ -66,7 +66,7 @@ export const Footer = component$(() => {
                 key={link.path}
                 class="hover:underline hover:underline-offset-2"
               >
-                <a href={link.path}>{link.label}</a>
+                <Link href={link.path}>{link.label}</Link>
               </li>
             ))}
           </ul>
