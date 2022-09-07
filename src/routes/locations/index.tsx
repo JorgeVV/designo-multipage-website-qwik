@@ -124,7 +124,7 @@ export const LocationCard = component$((props: LocationCardProps) => {
         <div
           class={clsx(
             "relative bg-cream text-center plb-20 pli-6 space-b-6 overflow-hidden",
-            "text-start tablet:rounded-2xl tablet:pli-18 tablet:plb-20",
+            "tablet:text-start tablet:rounded-2xl tablet:pli-18 tablet:plb-20",
             "desktop:flex-1 desktop:pli-24"
           )}
         >
