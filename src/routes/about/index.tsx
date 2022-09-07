@@ -235,7 +235,7 @@ export const Card = component$((props: CardProps) => {
 
 export const head: DocumentHead = () => {
   return {
-    title: "About Us",
+    title: "About Us - Designo",
     links: [
       {
         rel: "preload",
