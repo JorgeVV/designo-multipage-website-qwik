@@ -66,6 +66,7 @@ export default component$(() => {
 
 export const head: DocumentHead = () => {
   return {
+    title: "Web Design - Designo",
     links: [...preloads(desktopDecoration)],
   };
 };

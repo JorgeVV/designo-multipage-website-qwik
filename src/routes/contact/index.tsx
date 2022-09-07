@@ -1,9 +1,9 @@
 import { component$ } from "@builder.io/qwik";
-import {} from "@builder.io/qwik/jsx-runtime";
+import { DocumentHead } from "@builder.io/qwik-city";
 import clsx from "clsx";
+import bgPattern from "../../assets/shared/desktop/bg-pattern-two-circles.svg";
 import { LocationsSection } from "../../components/locations-section";
 import { Section } from "../../components/section";
-import bgPattern from "../../assets/shared/desktop/bg-pattern-two-circles.svg";
 
 export default component$(() => {
   return (
@@ -113,3 +113,17 @@ export const Input = component$((props: InputProps) => {
     </div>
   );
 });
+
+export const head: DocumentHead = () => {
+  return {
+    title: "Contact Us - Designo",
+    links: [
+      {
+        rel: "preload",
+        href: bgPattern,
+        as: "image",
+        fetchpriority: "high",
+      },
+    ],
+  };
+};

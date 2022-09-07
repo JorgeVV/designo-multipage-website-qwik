@@ -29,6 +29,10 @@ export const Head = component$(() => {
           ? head.title
           : "Designo - Award-winning custom designs and digital branding solutions"}
       </title>
+      <meta
+        name="description"
+        content="With over 10 years in the industry, we are experienced in creating fully responsive websites, app design, and engaging brand experiences"
+      />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <link rel="canonical" href={loc.href} />
 

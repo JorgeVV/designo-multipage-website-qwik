@@ -138,7 +138,9 @@ export const LocationCard = component$((props: LocationCardProps) => {
             width={584}
             height={584}
           />
-          <h2 class="relative text-peach text-h3 tablet:text-h2">{location.country}</h2>
+          <h2 class="relative text-peach text-h3 tablet:text-h2">
+            {location.country}
+          </h2>
           <address
             class={clsx(
               "relative flex flex-col space-b-6 not-italic text-body2",
@@ -176,6 +178,7 @@ export const LocationCard = component$((props: LocationCardProps) => {
 export const head: DocumentHead = () => {
   const [firstLocation, secondLocation] = locations;
   return {
+    title: "Locations - Designo",
     links: [
       {
         rel: "preload",

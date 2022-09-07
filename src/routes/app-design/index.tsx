@@ -58,6 +58,7 @@ export default component$(() => {
 
 export const head: DocumentHead = () => {
   return {
+    title: "App Design - Designo",
     links: [...preloads(desktopDecoration)],
   };
 };
