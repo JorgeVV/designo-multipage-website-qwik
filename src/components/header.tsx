@@ -163,7 +163,7 @@ export const Header = component$(() => {
               <ul class="flex flex-col uppercase space-b-8 text-white text-h4">
                 {links.map((link) => (
                   <li key={link.path} onClick$={toggleMenu}>
-                    <Link href={link.path}>{link.label}</Link>
+                    <Link class="block is-full plb-4 -mlb-4" href={link.path}>{link.label}</Link>
                   </li>
                 ))}
               </ul>
