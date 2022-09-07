@@ -112,7 +112,7 @@ export const LocationCard = component$((props: LocationCardProps) => {
             height={326}
           />
           <img
-            class="tablet:rounded-2xl"
+            class="tablet:rounded-2xl is-full object-cover"
             src={location.map.square}
             alt=""
             srcSet={`${location.map.square} 375w`}
