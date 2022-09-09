@@ -1,7 +1,18 @@
-import { component$ } from "@builder.io/qwik";
+import {
+  $,
+  component$,
+  createContext,
+  useClientEffect$,
+  useContext,
+  useContextProvider,
+  useRef,
+  useStore,
+  useWatch$,
+} from "@builder.io/qwik";
 import { DocumentHead } from "@builder.io/qwik-city";
 import clsx from "clsx";
-import bgPattern from "../../assets/shared/desktop/bg-pattern-two-circles.svg";
+import bgPatternTablet from "../../assets/contact/desktop/bg-pattern-hero-desktop.svg";
+import bgPatternMobile from "../../assets/contact/mobile/bg-pattern-hero-contact-mobile.svg";
 import { LocationsSection } from "../../components/locations-section";
 import { Section } from "../../components/section";
 
@@ -14,22 +25,67 @@ export default component$(() => {
   );
 });
 
+export const formContext = createContext<{
+  noValidate: boolean;
+  triedSubmit: boolean;
+}>("contactFormContext");
+
+export const BgImage = component$(() => (
+  <picture>
+    <source
+      srcSet={`${bgPatternTablet} 768w`}
+      media="(min-width: 768px)"
+      width={640}
+      height={640}
+    />
+    <img
+      class={clsx(
+        "absolute bs-full is-full block-start-0 inset-inline-0 object-none object-[20%_top]",
+        "tablet:bs-[640px] tablet:is-[640px] tablet:-translate-x-[19%] tablet:-translate-y-[12%] tablet:object-contain",
+        "desktop:translate-x-0 desktop:translate-y-0 desktop:block-end-0 desktop:block-start-auto"
+      )}
+      src={bgPatternMobile}
+      width={876}
+      height={990}
+      loading="eager"
+      alt=""
+    />
+  </picture>
+));
+
 export const ContactForm = component$(() => {
+  const store = useStore({ noValidate: false, triedSubmit: false });
+  useContextProvider(formContext, store);
+  const formRef = useRef<HTMLFormElement>();
+
+  useClientEffect$(() => {
+    store.noValidate = true;
+    const form = formRef.current;
+    const handleSubmit = (e: SubmitEvent) => {
+      store.triedSubmit = true;
+      const form = e.target as HTMLFormElement;
+      const anyElementIsInvalid = Array.from(form.elements).find(
+        (el) => !(el as HTMLInputElement).validity.valid
+      );
+      if (anyElementIsInvalid) {
+        e.preventDefault();
+      }
+    };
+    form?.addEventListener("submit", handleSubmit);
+    return () => form?.removeEventListener("submit", handleSubmit);
+  });
+
   return (
     <Section variant="full">
       <div
         class={clsx(
-          "relative flex flex-col pli-6 plb-18 bg-peach text-white",
+          "relative flex flex-col pli-6 plb-18 bg-peach text-white overflow-hidden",
           "tablet:plb-18 tablet:pli-14 tablet:rounded-2xl",
           "desktop:flex-row desktop:pli-24 desktop:plb-14"
         )}
       >
-        <img
-          class="absolute is-full block-start-0 inline-start-0 object-none object-top"
-          src={bgPattern}
-          alt=""
-        />
-        <div class="relative flex flex-col text-center space-b-6 tablet:text-start tablet:space-b-8 desktop:flex-1">
+        <BgImage />
+        <div class="relative flex flex-col text-center space-b-6 tablet:text-start tablet:space-b-8 desktop:flex-1 desktop:justify-center">
           <h1 class="text-h3 tablet:text-h1">Contact Us</h1>
           <p class="text-body2 tablet:text-body">
             Ready to take it to the next level? Let's talk about your project or
@@ -39,7 +95,11 @@ export const ContactForm = component$(() => {
           </p>
         </div>
 
-        <form class="relative flex flex-col space-b-10 mbs-12 desktop:mbs-0 desktop:flex-1 desktop:mis-32">
+        <form
+          ref={formRef}
+          class="relative flex flex-col space-b-10 mbs-8 desktop:mbs-0 desktop:flex-1 desktop:mis-24"
+          noValidate={store.noValidate}
+        >
           <div class="flex flex-col space-b-6">
             <Input label="Name" name="name" required />
             <Input
@@ -54,14 +114,20 @@ export const ContactForm = component$(() => {
               label="Phone"
               name="phone"
               type="tel"
-              required
               inputMode="tel"
               autoComplete="tel"
             />
+            <Input
+              label="Your Message"
+              name="message"
+              type="textarea"
+              required
+            />
           </div>
           <button
+            type="submit"
             class={clsx(
-              "uppercase text-h6 pli-6 plb-4 rounded-lg transition-colors duration-300 hover:text-white active:text-white self-center",
+              "uppercase min-is-[152px] text-h6 pli-6 plb-4 rounded-lg transition-colors duration-300 hover:text-white active:text-white self-center",
               "bg-white text-dark-grey hover:bg-light-peach active:bg-light-peach",
               "tablet:self-end"
             )}
@@ -77,7 +143,7 @@ export const ContactForm = component$(() => {
 interface InputProps {
   label: string;
   name: string;
-  type?: string;
+  type?: "textarea" | string;
   required?: boolean;
   inputMode?: "email" | "tel" | "text";
   autoComplete?: string;
@@ -92,27 +158,112 @@ export const Input = component$((props: InputProps) => {
     inputMode,
     autoComplete,
   } = props;
+  const store = useStore<{ blurred: boolean; errorMessage: string | null }>({
+    blurred: false,
+    errorMessage: null,
+  });
+  const form = useContext(formContext);
+  const inputRef = useRef<HTMLInputElement | HTMLTextAreaElement>();
+  const isTextArea = type === "textarea";
+  const Component = isTextArea ? "textarea" : "input";
+  const errorMessageId = `${name}-error`;
+  const showError = (store.blurred || form.triedSubmit) && store.errorMessage;
+
+  const handleInput = $(() => {
+    const inputEl = inputRef.current!;
+    const { validity, validationMessage } = inputEl;
+    const { valid, typeMismatch, valueMissing } = validity;
+    store.errorMessage = valid
+      ? null
+      : typeMismatch
+      ? "Please use a valid email address"
+      : valueMissing
+      ? "Can't be empty"
+      : validationMessage;
+  });
+
+  useWatch$(({ track }) => {
+    const triedSubmit = track(form, "triedSubmit");
+    if (triedSubmit) {
+      handleInput();
+    }
+  });
+
   return (
-    <div class="relative z-0">
-      <input
-        type={type}
+    <div class="relative z-0 flex items-baseline">
+      <Component
+        ref={inputRef}
         name={name}
         id={name}
-        class="block plb-3 pli-4 is-full border-white text-white bg-transparent border-0 border-be appearance-none focus:outline-none focus:ring-0 focus:border-white focus:border-be-2 peer"
+        class={clsx(
+          "block pbe-3 pli-4 is-full text-white bg-transparent border-none appearance-none peer resize-none mbs-3",
+          "focus:outline-none focus:ring-0"
+        )}
         placeholder=" "
         required={required}
         inputMode={inputMode}
         autoComplete={autoComplete}
+        maxLength={250}
+        onBlur$={() => (store.blurred = true)}
+        onInput$={handleInput}
+        {...(isTextArea
+          ? {
+              rows: 3,
+              spellCheck: "true",
+            }
+          : { type })}
+        {...(showError
+          ? {
+              "aria-invalid": "true",
+              "aria-errormessage": errorMessageId,
+            }
+          : {})}
       />
       <label
         htmlFor={name}
-        class="absolute duration-300 translate-x-4 -translate-y-8 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:text-white/50 peer-focus:scale-75 peer-focus:text-white peer-focus:-translate-y-6"
+        class={clsx(
+          "absolute motion-safe:duration-300 translate-x-4 scale-90 -z-10 origin-[0] transition-transform",
+          "peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:text-white/50 peer-focus:scale-90 peer-focus:text-white",
+          isTextArea
+            ? "block-start-4 -translate-y-6 peer-focus:-translate-y-6"
+            : "block-end-3 -translate-y-4 peer-focus:-translate-y-4"
+        )}
       >
         {label}
+        {required && <small> (required)</small>}
       </label>
+      <p
+        id={errorMessageId}
+        key={store.errorMessage || undefined}
+        role="alert"
+        class={clsx(
+          "hidden items-end space-i-2 shrink-0 animate-fadeIn italic text-body3 text-[12px] tracking-normal",
+          { "peer-invalid:flex": showError }
+        )}
+      >
+        <span>{store.errorMessage}</span>
+        <ErrorIcon />
+      </p>
+      <div class="absolute block-end-0 bs-px is-full bg-white peer-focus:bs-[3px]" />
     </div>
   );
 });
+
+export function ErrorIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      aria-hidden="true"
+    >
+      <g fill="none" fill-rule="evenodd">
+        <circle cx="10" cy="10" r="10" fill="#FFF" />
+        <path fill="#E7816B" d="M11 14v2H9v-2h2zm0-9v7H9V5h2z" />
+      </g>
+    </svg>
+  );
+}
 
 export const head: DocumentHead = () => {
   return {
@@ -120,7 +271,15 @@ export const head: DocumentHead = () => {
     links: [
       {
         rel: "preload",
-        href: bgPattern,
+        href: bgPatternMobile,
+        media: "(max-width: 767.9px)",
+        as: "image",
+        fetchpriority: "high",
+      },
+      {
+        rel: "preload",
+        href: bgPatternTablet,
+        media: "(min-width: 768px)",
         as: "image",
         fetchpriority: "high",
       },
