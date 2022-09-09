@@ -7,7 +7,7 @@ import netlifyEdge from "@netlify/vite-plugin-netlify-edge";
 export default defineConfig(() => {
   return {
     build: {
-      assetsInlineLimit: 1024,
+      assetsInlineLimit: 600,
     },
     plugins: [
       qwikCity(),
