@@ -237,7 +237,7 @@ export const Input = component$((props: InputProps) => {
         key={store.errorMessage || undefined}
         role="alert"
         class={clsx(
-          "hidden items-end space-i-2 shrink-0 animate-fadeIn italic text-body3 text-[12px] tracking-normal",
+          "hidden select-none items-end space-i-2 shrink-0 animate-fadeIn italic text-body3 text-[12px] tracking-normal",
           { "peer-invalid:flex": showError }
         )}
       >
