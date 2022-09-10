@@ -47,3 +47,11 @@
     scroll-margin-top: 120px;
   }
 }
+
+@media screen(desktop) {
+  .bg-layout {
+    background-image: url("./assets/shared/desktop/bg-pattern-leaf.svg");
+    background-position: left 345px;
+    background-repeat: no-repeat;
+  }
+}
