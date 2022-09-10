@@ -83,7 +83,7 @@ export const Hero = component$(() => {
             experiences. Find out more about our services.
           </p>
           <div class="mbs-6 tablet:mbs-5 desktop:mbs-10">
-            <LinkButton href="#">Learn more</LinkButton>
+            <LinkButton href="/about">Learn more</LinkButton>
           </div>
         </div>
         <div
