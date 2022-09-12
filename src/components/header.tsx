@@ -88,7 +88,9 @@ export const Header = component$(() => {
             )}
           >
             <Link prefetch href="/">
-              <span class="sr-only">Designo</span>
+              <span id="header-title" class="sr-only">
+                Designo
+              </span>
               <img
                 src={logoDark}
                 alt=""
@@ -98,7 +100,11 @@ export const Header = component$(() => {
               />
             </Link>
             <div class="mis-auto flex">
-              <nav role="navigation" class="hidden tablet:block">
+              <nav
+                role="navigation"
+                aria-labelledby="header-title"
+                class="hidden tablet:block"
+              >
                 <ul
                   role="list"
                   class="tablet:flex tablet:items-center tablet:space-i-10 tablet:uppercase tablet:text-body3 desktop:space-i-11"
@@ -108,7 +114,7 @@ export const Header = component$(() => {
                       <Link
                         prefetch
                         href={link.path}
-                        class="hover:underline hover:underline-offset-2"
+                        class="inline-block hover:underline hover:underline-offset-2 p-4 -m-4"
                       >
                         {link.label}
                       </Link>
@@ -160,14 +166,18 @@ export const Header = component$(() => {
                 />
               </svg>
             </button>
-            <nav class="bg-black pli-6 plb-12 -mbs-px">
+            <nav
+              role="navigation"
+              aria-labelledby="header-title"
+              class="bg-black pli-6 plb-12 -mbs-px"
+            >
               <ul class="flex flex-col uppercase space-b-8 text-white text-h4">
                 {links.map((link) => (
                   <li key={link.path} onClick$={toggleMenu}>
                     <Link
                       prefetch
                       href={link.path}
-                      class="block is-full plb-4 -mlb-4"
+                      class="hover:underline hover:underline-offset-2 block is-full plb-4 -mlb-4"
                     >
                       {link.label}
                     </Link>

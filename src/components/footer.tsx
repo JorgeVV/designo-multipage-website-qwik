@@ -37,7 +37,9 @@ export const Footer = component$(() => {
           href="/"
           class={clsx("flex justify-center", "tablet:justify-start")}
         >
-          <span class="sr-only">Designo</span>
+          <span id="footer-title" class="sr-only">
+            Designo
+          </span>
           <img src={logoLight} loading="lazy" alt="" width={202} height={27} />
         </Link>
 
@@ -48,32 +50,25 @@ export const Footer = component$(() => {
           )}
         />
 
-        <nav
-          role="navigation"
+        <ul
+          role="list"
+          aria-labelledby="footer-title"
           class={clsx(
-            "text-white text-body3 uppercase -mbs-2",
-            "tablet:col-span-2 tablet:mbs-0"
+            "flex flex-col items-center space-b-8 text-white text-body3 uppercase -mbs-2",
+            "tablet:col-span-2 tablet:mbs-0 tablet:flex-row tablet:justify-end tablet:space-b-0 tablet:space-i-10"
           )}
         >
-          <ul
-            role="list"
-            class={clsx(
-              "flex flex-col items-center space-b-8",
-              "tablet:flex-row tablet:justify-end tablet:space-b-0 tablet:space-i-10"
-            )}
-          >
-            {links.map((link) => (
-              <li
-                key={link.path}
-                class="hover:underline hover:underline-offset-2"
-              >
-                <Link prefetch href={link.path}>
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+          {links.map((link) => (
+            <li
+              key={link.path}
+              class="hover:underline hover:underline-offset-2"
+            >
+              <Link prefetch href={link.path} class="inline-block p-4 -m-4">
+                {link.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
 
         <address
           class={clsx(
@@ -108,7 +103,7 @@ export const Footer = component$(() => {
         >
           {socials.map((social) => (
             <li key={social.path}>
-              <a href={social.path}>
+              <a href={social.path} class="inline-block p-2 -m-2">
                 <span class="sr-only">{social.label}</span>
                 <img
                   src={social.icon}
