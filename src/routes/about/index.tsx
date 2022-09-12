@@ -201,6 +201,7 @@ export const Card = component$((props: CardProps) => {
           alt=""
           width={375}
           height={320}
+          loading="lazy"
         />
       </picture>
       <div

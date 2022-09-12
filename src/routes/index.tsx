@@ -9,7 +9,6 @@ import bgPattern from "../assets/shared/desktop/bg-pattern-small-circle.svg";
 import { LinkButton } from "../components/link-button";
 import { Section } from "../components/section";
 import { ServicesSection } from "../components/services-section";
-import bgImage from "../assets/shared/desktop/bg-pattern-leaf.svg";
 
 export default component$(() => {
   return (
@@ -161,8 +160,15 @@ export const WhyDesignoSection = component$(() => {
                   alt=""
                   width={200}
                   height={200}
+                  loading="lazy"
                 />
-                <img src={reason.image} alt="" width={200} height={200} />
+                <img
+                  src={reason.image}
+                  alt=""
+                  width={200}
+                  height={200}
+                  loading="lazy"
+                />
               </div>
               <div
                 class={clsx(
@@ -186,7 +192,6 @@ export const head: DocumentHead = () => {
   return {
     links: [
       { rel: "preload", href: heroImg, as: "image", fetchpriority: "high" },
-      { rel: "preload", href: bgImage, as: "image", fetchpriority: "high" },
     ],
   };
 };

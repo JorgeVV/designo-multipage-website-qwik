@@ -107,6 +107,7 @@ export const ServicesSection = component$((props: ServicesSectionProps) => {
                 <img
                   src={service.images.mobile}
                   alt=""
+                  loading="lazy"
                   class={clsx("absolute inset-0 object-cover bs-full is-full")}
                   width={328}
                   height={250}

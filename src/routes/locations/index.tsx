@@ -91,7 +91,7 @@ export interface LocationCardProps {
 }
 
 export const LocationCard = component$((props: LocationCardProps) => {
-  const { location, variant = "image-end" } = props;
+  const { location, imagePriority, variant = "image-end" } = props;
   return (
     <Section variant="full">
       <div
@@ -116,6 +116,7 @@ export const LocationCard = component$((props: LocationCardProps) => {
             src={location.map.square}
             alt=""
             srcSet={`${location.map.square} 375w`}
+            loading={imagePriority === "high" ? "eager" : "lazy"}
             width={375}
             height={320}
           />
