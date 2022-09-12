@@ -38,7 +38,6 @@ export const ContactCtaSection = component$(() => {
               alt=""
               width={876}
               height={584}
-              loading="lazy"
             />
             <div
               class={clsx(

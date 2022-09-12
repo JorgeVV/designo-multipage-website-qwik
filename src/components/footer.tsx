@@ -38,7 +38,7 @@ export const Footer = component$(() => {
           class={clsx("flex justify-center", "tablet:justify-start")}
         >
           <span class="sr-only">Designo</span>
-          <img src={logoLight} loading="lazy" alt="" width={202} height={27} />
+          <img src={logoLight} alt="" width={202} height={27} />
         </Link>
 
         <hr
@@ -115,7 +115,6 @@ export const Footer = component$(() => {
                   alt=""
                   width={24}
                   height={24}
-                  loading="lazy"
                 />
               </a>
             </li>

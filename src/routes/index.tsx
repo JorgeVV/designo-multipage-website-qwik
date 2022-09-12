@@ -160,14 +160,12 @@ export const WhyDesignoSection = component$(() => {
                   alt=""
                   width={200}
                   height={200}
-                  loading="lazy"
                 />
                 <img
                   src={reason.image}
                   alt=""
                   width={200}
                   height={200}
-                  loading="lazy"
                 />
               </div>
               <div

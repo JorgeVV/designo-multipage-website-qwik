@@ -35,7 +35,6 @@ export const ProjectsShowcaseSection = component$(
                 )}
                 src={project.image}
                 alt=""
-                loading="lazy"
                 width={700}
                 height={640}
               />

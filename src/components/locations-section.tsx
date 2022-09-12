@@ -34,12 +34,10 @@ export const LocationsSection = component$(() => {
                   alt=""
                   width={200}
                   height={200}
-                  loading="lazy"
                 />
                 <img
                   src={location.image}
                   alt=""
-                  loading="lazy"
                   width={200}
                   height={200}
                 />
