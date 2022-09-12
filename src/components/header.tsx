@@ -87,7 +87,7 @@ export const Header = component$(() => {
               "desktop:pli-41"
             )}
           >
-            <Link href="/">
+            <Link prefetch href="/">
               <span class="sr-only">Designo</span>
               <img
                 src={logoDark}
@@ -106,6 +106,7 @@ export const Header = component$(() => {
                   {links.map((link) => (
                     <li key={link.path}>
                       <Link
+                        prefetch
                         href={link.path}
                         class="hover:underline hover:underline-offset-2"
                       >
@@ -163,7 +164,13 @@ export const Header = component$(() => {
               <ul class="flex flex-col uppercase space-b-8 text-white text-h4">
                 {links.map((link) => (
                   <li key={link.path} onClick$={toggleMenu}>
-                    <Link class="block is-full plb-4 -mlb-4" href={link.path}>{link.label}</Link>
+                    <Link
+                      prefetch
+                      href={link.path}
+                      class="block is-full plb-4 -mlb-4"
+                    >
+                      {link.label}
+                    </Link>
                   </li>
                 ))}
               </ul>

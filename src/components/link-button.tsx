@@ -11,6 +11,7 @@ export const LinkButton = component$((props: LinkButtonProps) => {
   const { href, variant = "light" } = props;
   return (
     <Link
+      prefetch
       class={clsx(
         "inline-block uppercase text-h6 pli-6 plb-4 rounded-lg transition-colors duration-300 hover:text-white active:text-white",
         variant === "light" &&

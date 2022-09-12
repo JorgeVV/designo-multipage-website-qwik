@@ -33,6 +33,7 @@ export const Footer = component$(() => {
         )}
       >
         <Link
+          prefetch
           href="/"
           class={clsx("flex justify-center", "tablet:justify-start")}
         >
@@ -66,7 +67,9 @@ export const Footer = component$(() => {
                 key={link.path}
                 class="hover:underline hover:underline-offset-2"
               >
-                <Link href={link.path}>{link.label}</Link>
+                <Link prefetch href={link.path}>
+                  {link.label}
+                </Link>
               </li>
             ))}
           </ul>

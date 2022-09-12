@@ -115,6 +115,7 @@ export const ServicesSection = component$((props: ServicesSectionProps) => {
               </picture>
               <div className="absolute inset-0 bg-trueblack/50 transition-colors duration-300 group-hover:bg-peach/80 group-active:bg-peach/80" />
               <Link
+                prefetch
                 href={service.path}
                 class={clsx(
                   "text-white text-center space-b-3 after:absolute after:inset-0 z-10",
