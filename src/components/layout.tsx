@@ -10,7 +10,7 @@ export default component$(() => {
       <Header />
       <main id="main-content" class="flex-1">
         <div class="relative mli-auto tablet:max-is-screen-tablet desktop:max-is-screen-desktop is-full">
-          <div class="bg-layout absolute inset-0" />
+          <div class="bg-layout" />
           <Slot />
         </div>
         <Slot name="contactCta" />
