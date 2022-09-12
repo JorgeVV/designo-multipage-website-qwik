@@ -26,7 +26,7 @@
     "@types/node": "latest",
     "@typescript-eslint/eslint-plugin": "^5.36.2",
     "@typescript-eslint/parser": "^5.36.2",
-    "autoprefixer": "^10.4.8",
+    "autoprefixer": "^10.4.9",
     "eslint": "^8.23.0",
     "eslint-plugin-qwik": "^0.0.108",
     "node-fetch": "3.2.10",
