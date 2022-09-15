@@ -31,7 +31,6 @@ export const HeroBackgroundPattern = component$(() => {
       width="640"
       height="639"
       viewBox="0 0 640 639"
-      xmlns="http://www.w3.org/2000/svg"
     >
       <defs>
         <linearGradient x1="0%" y1="50%" x2="100%" y2="50%" id="a">

@@ -134,7 +134,6 @@ export const ServicesSection = component$((props: ServicesSectionProps) => {
                       "text-peach transition-colors duration-300 group-hover:text-white group-active:text-white mis-4",
                       "tablet:mis-5"
                     )}
-                    xmlns="http://www.w3.org/2000/svg"
                     aria-hidden="true"
                   >
                     <path
