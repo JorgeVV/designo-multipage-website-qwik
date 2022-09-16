@@ -28,13 +28,6 @@ export const Header = component$(() => {
     state.menuOpen = !state.menuOpen;
   });
 
-  useOnDocument(
-    "scroll",
-    $(() => {
-      state.shadowVisible = window.scrollY > 60 ?? false;
-    })
-  );
-
   return (
     <>
       <a
@@ -49,6 +42,9 @@ export const Header = component$(() => {
           "before:absolute before:-z-10 before:inset-0 before:shadow-sm before:transition-opacity before:duration-300",
           state.shadowVisible ? "before:opacity-100" : "before:opacity-0"
         )}
+        window:onScroll$={() => {
+          state.shadowVisible = window.scrollY > 60;
+        }}
       >
         <div class="mli-auto tablet:max-is-screen-tablet desktop:max-is-screen-desktop">
           <div
@@ -162,19 +158,15 @@ export const MobileMenu = component$((props: MobileMenuProps) => {
     })
   );
 
-  useOnDocument(
-    "keydown",
-    $((event: Event) => {
-      if ((event as KeyboardEvent).key === "Escape") {
-        onCloseMenu$();
-      }
-    })
-  );
-
   return (
     <div
       ref={menuRef}
       class="fixed block-start-[92px] inset-inline-0 min-bs-screen animate-fadeIn tablet:hidden"
+      document:onKeyDown$={(event: KeyboardEvent) => {
+        if (event.key === "Escape") {
+          onCloseMenu$();
+        }
+      }}
     >
       <div
         class="absolute bg-trueblack/50 inset-0 -z-10"
