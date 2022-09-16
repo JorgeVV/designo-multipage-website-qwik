@@ -122,6 +122,7 @@ export const LocationCard = component$((props: LocationCardProps) => {
           />
         </picture>
         <div
+          id={location.key}
           class={clsx(
             "relative bg-cream text-center plb-20 pli-6 space-b-6 overflow-hidden",
             "tablet:text-start tablet:rounded-2xl tablet:pli-18 tablet:plb-20",
@@ -138,10 +139,7 @@ export const LocationCard = component$((props: LocationCardProps) => {
             width={584}
             height={584}
           />
-          <h2
-            id={location.key}
-            class="relative text-peach text-h3 tablet:text-h2"
-          >
+          <h2 class="relative text-peach text-h3 tablet:text-h2">
             {location.country}
           </h2>
           <address
