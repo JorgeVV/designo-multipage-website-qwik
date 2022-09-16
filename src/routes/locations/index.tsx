@@ -138,7 +138,10 @@ export const LocationCard = component$((props: LocationCardProps) => {
             width={584}
             height={584}
           />
-          <h2 class="relative text-peach text-h3 tablet:text-h2">
+          <h2
+            id={location.key}
+            class="relative text-peach text-h3 tablet:text-h2"
+          >
             {location.country}
           </h2>
           <address
