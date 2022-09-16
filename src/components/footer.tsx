@@ -1,5 +1,5 @@
 import { component$ } from "@builder.io/qwik";
-import { Link } from "@builder.io/qwik-city";
+import { Link, useLocation } from "@builder.io/qwik-city";
 import clsx from "clsx";
 import fbIcon from "../assets/shared/desktop/icon-facebook.svg";
 import insIcon from "../assets/shared/desktop/icon-instagram.svg";
@@ -23,6 +23,7 @@ export const socials = [
 ];
 
 export const Footer = component$(() => {
+  const location = useLocation();
   return (
     <footer class="bg-black">
       <div
@@ -36,6 +37,11 @@ export const Footer = component$(() => {
           prefetch
           href="/"
           class={clsx("flex justify-center", "tablet:justify-start")}
+          {...(location.pathname === "/"
+            ? {
+                "aria-current": "page",
+              }
+            : {})}
         >
           <span id="footer-title" class="sr-only">
             Designo
@@ -63,7 +69,16 @@ export const Footer = component$(() => {
               key={link.path}
               class="hover:underline hover:underline-offset-2"
             >
-              <Link prefetch href={link.path} class="inline-block p-4 -m-4">
+              <Link
+                prefetch
+                href={link.path}
+                class="inline-block p-4 -m-4"
+                {...(location.pathname === link.path
+                  ? {
+                      "aria-current": "page",
+                    }
+                  : {})}
+              >
                 {link.label}
               </Link>
             </li>

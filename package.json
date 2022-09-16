@@ -48,6 +48,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
+    "aria-hidden": "^1.2.1",
     "body-scroll-lock": "^4.0.0-beta.0",
     "clsx": "^1.2.1",
     "focus-lock": "^0.11.2"
