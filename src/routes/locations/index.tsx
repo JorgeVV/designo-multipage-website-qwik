@@ -95,6 +95,7 @@ export const LocationCard = component$((props: LocationCardProps) => {
   return (
     <Section variant="full">
       <div
+        id={location.key}
         class={clsx(
           "flex flex-col is-full",
           "tablet:space-b-8",
@@ -122,7 +123,6 @@ export const LocationCard = component$((props: LocationCardProps) => {
           />
         </picture>
         <div
-          id={location.key}
           class={clsx(
             "relative bg-cream text-center plb-20 pli-6 space-b-6 overflow-hidden",
             "tablet:text-start tablet:rounded-2xl tablet:pli-18 tablet:plb-20",
