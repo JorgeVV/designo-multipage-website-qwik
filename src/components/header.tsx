@@ -3,7 +3,6 @@ import {
   component$,
   QRL,
   useClientEffect$,
-  useOnDocument,
   useOnWindow,
   useRef,
   useStore,
