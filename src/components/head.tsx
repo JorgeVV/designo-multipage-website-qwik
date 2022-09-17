@@ -22,7 +22,7 @@ export const Head = component$(() => {
   ];
 
   return (
-    <head>
+    <>
       <meta charSet="utf-8" />
       <title>
         {head.title
@@ -47,6 +47,6 @@ export const Head = component$(() => {
       {head.styles.map((s) => (
         <style {...s.props} dangerouslySetInnerHTML={s.style} />
       ))}
-    </head>
+    </>
   );
 });

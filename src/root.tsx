@@ -11,7 +11,9 @@ import "./global.css";
 export default component$(() => {
   return (
     <QwikCity>
-      <Head />
+      <head>
+        <Head />
+      </head>
       <body
         lang="en"
         class="antialiased bg-white text-body text-dark-grey bs-full"
