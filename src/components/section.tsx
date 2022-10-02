@@ -14,8 +14,9 @@ export const Section = component$((props: SectionProps) => {
       class={[
         "items-center",
         "tablet:first:pbs-8",
+        variant !== "full-bleed" ? "tablet:pli-10 desktop:pli-41" : "",
         {
-          "full-bleed": "tablet:pli-10 desktop:pli-41",
+          "full-bleed": "",
           "with-padding": "pli-6",
           full: "is-full",
         }[variant],
