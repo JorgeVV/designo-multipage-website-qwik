@@ -6,7 +6,7 @@ import { Section } from "./section";
 
 export const ContactCtaSection = component$(() => {
   return (
-    <Section variant="full-bleed">
+    <Section wrapperElement="aside" variant="full-bleed">
       <div class="relative mbs-32 tablet:mbs-17 desktop:mbs-40 -mbe-px">
         <div
           class={clsx(
