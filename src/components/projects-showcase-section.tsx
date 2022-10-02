@@ -1,5 +1,4 @@
 import { component$ } from "@builder.io/qwik";
-import clsx from "clsx";
 import { Section } from "./section";
 
 export interface GalleryProject {
@@ -21,18 +20,18 @@ export const ProjectsShowcaseSection = component$(
           {projects.map((project) => (
             <article
               key={project.title}
-              class={clsx(
+              class={[
                 "relative flex flex-col rounded-2xl overflow-hidden group",
                 "tablet:flex-row",
-                "desktop:flex-col"
-              )}
+                "desktop:flex-col",
+              ]}
             >
               <img
-                class={clsx(
+                class={[
                   "object-cover -z-10 group-hover:motion-safe:scale-105 transition-transform duration-500",
                   "tablet:is-1/2",
-                  "desktop:is-full"
-                )}
+                  "desktop:is-full",
+                ]}
                 src={project.image}
                 alt=""
                 loading="lazy"
@@ -40,11 +39,11 @@ export const ProjectsShowcaseSection = component$(
                 height={640}
               />
               <div
-                class={clsx(
+                class={[
                   "flex flex-col items-center space-b-4 bg-cream text-center p-8 transition-colors duration-500",
                   "group-hover:bg-peach group-hover:text-white",
-                  "tablet:justify-center tablet:flex-1"
-                )}
+                  "tablet:justify-center tablet:flex-1",
+                ]}
               >
                 <h3 class="text-peach group-hover:text-white text-h5 uppercase transition-colors duration-500">
                   <a

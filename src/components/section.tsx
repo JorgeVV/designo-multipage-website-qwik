@@ -1,5 +1,4 @@
 import { component$, Slot } from "@builder.io/qwik";
-import clsx from "clsx";
 
 export interface SectionProps {
   wrapperElement?: "section" | "aside";
@@ -12,6 +11,15 @@ export const Section = component$((props: SectionProps) => {
 
   return (
     <Wrapper
+      class={[
+        "items-center",
+        "tablet:first:pbs-8",
+        {
+          "full-bleed": "tablet:pli-10 desktop:pli-41",
+          "with-padding": "pli-6",
+          full: "is-full",
+        }[variant],
+      ]}
     >
       <Slot />
     </Wrapper>

@@ -1,6 +1,5 @@
 import { component$ } from "@builder.io/qwik";
 import { DocumentHead } from "@builder.io/qwik-city";
-import clsx from "clsx";
 import heroDecorationTablet from "../../assets/about/desktop/bg-pattern-hero-about-desktop.svg";
 import heroImageDesktop from "../../assets/about/desktop/image-about-hero.webp";
 import realDealImageDesktop from "../../assets/about/desktop/image-real-deal.webp";
@@ -12,9 +11,9 @@ import wordClassImageMobile from "../../assets/about/mobile/image-world-class-ta
 import heroImageTablet from "../../assets/about/tablet/image-about-hero.webp";
 import realDealImageTablet from "../../assets/about/tablet/image-real-deal.webp";
 import wordClassImageTablet from "../../assets/about/tablet/image-world-class-talent.webp";
+import bgPattern from "../../assets/shared/desktop/bg-pattern-three-circles.svg";
 import { LocationsSection } from "../../components/locations-section";
 import { Section } from "../../components/section";
-import bgPattern from "../../assets/shared/desktop/bg-pattern-three-circles.svg";
 
 export default component$(() => {
   return (
@@ -31,10 +30,10 @@ export const Hero = component$(() => {
   return (
     <Section variant="full">
       <div
-        class={clsx(
+        class={[
           "flex flex-col tablet:rounded-2xl overflow-hidden",
-          "desktop:flex-row-reverse"
-        )}
+          "desktop:flex-row-reverse",
+        ]}
       >
         <picture>
           <source
@@ -50,11 +49,11 @@ export const Hero = component$(() => {
             height={320}
           />
           <img
-            class={clsx(
+            class={[
               "bs-full is-full object-cover",
               "tablet:max-bs-[50%]",
-              "desktop:bs-full desktop:is-full desktop:max-bs-[480px]"
-            )}
+              "desktop:bs-full desktop:is-full desktop:max-bs-[480px]",
+            ]}
             src={heroImageMobile}
             srcSet={`${heroImageMobile} 375w`}
             alt=""
@@ -64,11 +63,11 @@ export const Hero = component$(() => {
           />
         </picture>
         <div
-          class={clsx(
+          class={[
             "relative bg-peach is-full pli-6 plb-20 overflow-hidden",
             "tablet:plb-16 tablet:pli-14",
-            "desktop:flex-row desktop:plb-32 desktop:pis-24 desktop:pie-20 tablet:flex-1"
-          )}
+            "desktop:flex-row desktop:plb-32 desktop:pis-24 desktop:pie-20 tablet:flex-1",
+          ]}
         >
           <picture>
             <source
@@ -78,11 +77,11 @@ export const Hero = component$(() => {
               height={640}
             />
             <img
-              class={clsx(
+              class={[
                 "absolute inset-0 object-none object-[100%_28%]",
                 "tablet:-block-start-[440px] tablet:-inline-start-28 tablet:object-center tablet:object-cover",
-                "desktop:block-start-auto desktop:inline-start-auto desktop:block-end-0 desktop:inline-end-0"
-              )}
+                "desktop:block-start-auto desktop:inline-start-auto desktop:block-end-0 desktop:inline-end-0",
+              ]}
               src={heroDecorationMobile}
               srcSet={`${heroDecorationMobile} 375w`}
               alt=""
@@ -92,18 +91,18 @@ export const Hero = component$(() => {
             />
           </picture>
           <div
-            class={clsx(
+            class={[
               "relative flex flex-col items-center text-white text-center",
-              "desktop:text-start desktop:items-start"
-            )}
+              "desktop:text-start desktop:items-start",
+            ]}
           >
             <h1 class="text-h3 tablet:text-h1">About Us</h1>
             <p
-              class={clsx(
+              class={[
                 "text-body2 mbs-3.5",
                 "tablet:mbs-6 tablet:text-body tablet:max-is-xl",
-                "desktop:max-is-none-is-md desktop:mbs-8"
-              )}
+                "desktop:max-is-none-is-md desktop:mbs-8",
+              ]}
             >
               Founded in 2010, we are a creative agency that produces lasting
               results for our clients. We've partnered with many startups,
@@ -168,14 +167,14 @@ export const Card = component$((props: CardProps) => {
   const { title, texts, images, variant = "image-start" } = props;
   return (
     <div
-      class={clsx(
+      class={[
         "flex flex-col overflow-hidden tablet:rounded-2xl",
         "desktop:max-bs-min",
         {
-          "desktop:flex-row": variant === "image-start",
-          "desktop:flex-row-reverse": variant === "image-end",
-        }
-      )}
+          "image-start": "desktop:flex-row",
+          "image-end": "desktop:flex-row-reverse",
+        }[variant],
+      ]}
     >
       <picture>
         <source
@@ -191,11 +190,11 @@ export const Card = component$((props: CardProps) => {
           height={320}
         />
         <img
-          class={clsx(
+          class={[
             "bs-full is-full object-cover",
             "tablet:max-bs-[50%]",
-            "desktop:bs-full desktop:min-is-full desktop:basis-full desktop:max-bs-[none]"
-          )}
+            "desktop:bs-full desktop:min-is-full desktop:basis-full desktop:max-bs-[none]",
+          ]}
           src={images.mobile}
           srcSet={`${images.mobile} 375w`}
           alt=""
@@ -205,18 +204,18 @@ export const Card = component$((props: CardProps) => {
         />
       </picture>
       <div
-        class={clsx(
+        class={[
           "relative bg-cream plb-20 pli-6 text-center",
           "tablet:plb-17 tablet:pli-17",
-          "desktop:pli-24 desktop:plb-36 desktop:max-is-[58%] desktop:text-start"
-        )}
+          "desktop:pli-24 desktop:plb-36 desktop:max-is-[58%] desktop:text-start",
+        ]}
       >
         <img
-          class={clsx(
+          class={[
             "absolute block-start-0 inline-start-0 bs-full object-none object-left-top",
             "tablet:is-full tablet:object-[95%_120%]",
-            "desktop:object-[-225%_bottom]"
-          )}
+            "desktop:object-[-225%_bottom]",
+          ]}
           src={bgPattern}
           alt=""
           width={584}

@@ -10,7 +10,6 @@ import {
 import { Link, useLocation } from "@builder.io/qwik-city";
 import { hideOthers } from "aria-hidden";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
-import clsx from "clsx";
 import logoDark from "../assets/shared/desktop/logo-dark.webp";
 import focusTrap from "../utils/focus-trap";
 
@@ -36,22 +35,22 @@ export const Header = component$(() => {
         Skip to main content
       </a>
       <header
-        class={clsx(
+        class={[
           "is-full bs-full sticky block-start-0 inset-inline-0 tablet:-block-start-8 z-50 bg-white",
           "before:absolute before:-z-10 before:inset-0 before:shadow-sm before:transition-opacity before:duration-300",
-          state.shadowVisible ? "before:opacity-100" : "before:opacity-0"
-        )}
+          state.shadowVisible ? "before:opacity-100" : "before:opacity-0",
+        ]}
         window:onScroll$={() => {
           state.shadowVisible = window.scrollY > 60;
         }}
       >
         <div class="mli-auto tablet:max-is-screen-tablet desktop:max-is-screen-desktop">
           <div
-            class={clsx(
+            class={[
               "flex pli-6 plb-8 items-center",
               "tablet:pli-10 tablet:pbs-16",
-              "desktop:pli-41"
-            )}
+              "desktop:pli-41",
+            ]}
           >
             <Link
               prefetch
@@ -102,10 +101,10 @@ export const Header = component$(() => {
                 </ul>
               </nav>
               <button
-                class={clsx(
+                class={[
                   "outline-offset-8 tablet:hidden text-black",
-                  state.menuOpen && "hidden"
-                )}
+                  state.menuOpen ? "hidden" : "",
+                ]}
                 onClick$={toggleMenu}
               >
                 <span class="sr-only">Open navigation menu</span>

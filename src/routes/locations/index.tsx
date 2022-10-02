@@ -1,6 +1,5 @@
 import { component$ } from "@builder.io/qwik";
 import { DocumentHead } from "@builder.io/qwik-city";
-import clsx from "clsx";
 import auOfficeMapSquare from "../../assets/locations/desktop/image-map-australia.webp";
 import caOfficeMapSquare from "../../assets/locations/desktop/image-map-canada.webp";
 import ukOfficeMapSquare from "../../assets/locations/desktop/image-map-united-kingdom.webp";
@@ -96,14 +95,15 @@ export const LocationCard = component$((props: LocationCardProps) => {
     <Section variant="full">
       <div
         id={location.key}
-        class={clsx(
+        class={[
           "flex flex-col is-full",
           "tablet:space-b-8",
           "desktop:space-b-0 desktop:space-i-8",
-          variant === "image-start" && "desktop:flex-row",
-          variant === "image-end" &&
-            "desktop:flex-row-reverse desktop:space-i-reverse"
-        )}
+          {
+            "image-start": "desktop:flex-row",
+            "image-end": "desktop:flex-row-reverse desktop:space-i-reverse",
+          }[variant],
+        ]}
       >
         <picture>
           <source
@@ -123,17 +123,17 @@ export const LocationCard = component$((props: LocationCardProps) => {
           />
         </picture>
         <div
-          class={clsx(
+          class={[
             "relative bg-cream text-center plb-20 pli-6 space-b-6 overflow-hidden",
             "tablet:text-start tablet:rounded-2xl tablet:pli-18 tablet:plb-20",
-            "desktop:flex-1 desktop:pli-24"
-          )}
+            "desktop:flex-1 desktop:pli-24",
+          ]}
         >
           <img
-            class={clsx(
+            class={[
               "absolute block-start-0 inline-start-0 bs-full object-none object-left-top",
-              "tablet:object-left-bottom"
-            )}
+              "tablet:object-left-bottom",
+            ]}
             src={bgPattern}
             alt=""
             width={584}
@@ -143,10 +143,10 @@ export const LocationCard = component$((props: LocationCardProps) => {
             {location.country}
           </h2>
           <address
-            class={clsx(
+            class={[
               "relative flex flex-col space-b-6 not-italic text-body2",
-              "tablet:flex-row tablet:space-b-0 tablet:space-i-28 tablet:text-body"
-            )}
+              "tablet:flex-row tablet:space-b-0 tablet:space-i-28 tablet:text-body",
+            ]}
           >
             <p>
               <b>{location.office}</b>

@@ -1,5 +1,4 @@
 import { component$ } from "@builder.io/qwik";
-import clsx from "clsx";
 import bgPattern from "../assets/shared/desktop/bg-pattern-small-circle.svg";
 import auImage from "../assets/shared/desktop/illustration-australia.svg";
 import caImage from "../assets/shared/desktop/illustration-canada.svg";
@@ -26,10 +25,10 @@ export const LocationsSection = component$(() => {
             <article class="flex flex-col space-b-12 items-center">
               <div class="relative">
                 <img
-                  class={clsx("absolute -z-10", {
-                    "rotate-90": index === 0,
-                    "-rotate-90": index === 2,
-                  })}
+                  class={[
+                    "absolute -z-10",
+                    index === 0 ? "rotate-90" : index === 2 ? "-rotate-90" : "",
+                  ]}
                   src={bgPattern}
                   alt=""
                   width={200}

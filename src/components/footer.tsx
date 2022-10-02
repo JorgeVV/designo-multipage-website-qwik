@@ -1,6 +1,5 @@
 import { component$ } from "@builder.io/qwik";
 import { Link, useLocation } from "@builder.io/qwik-city";
-import clsx from "clsx";
 import fbIcon from "../assets/shared/desktop/icon-facebook.svg";
 import insIcon from "../assets/shared/desktop/icon-instagram.svg";
 import pinIcon from "../assets/shared/desktop/icon-pinterest.svg";
@@ -27,16 +26,16 @@ export const Footer = component$(() => {
   return (
     <footer class="bg-black">
       <div
-        class={clsx(
+        class={[
           "relative grid mli-auto pli-6 plb-16 gap-y-10 items-center",
           "tablet:max-is-screen-tablet tablet:pli-10 tablet:plb-20 tablet:grid-cols-3",
-          "desktop:max-is-screen-desktop desktop:pli-41 desktop:plb-18"
-        )}
+          "desktop:max-is-screen-desktop desktop:pli-41 desktop:plb-18",
+        ]}
       >
         <Link
           prefetch
           href="/"
-          class={clsx("flex justify-center", "tablet:justify-start")}
+          class={["flex justify-center", "tablet:justify-start"]}
           {...(location.pathname === "/"
             ? {
                 "aria-current": "page",
@@ -50,19 +49,19 @@ export const Footer = component$(() => {
         </Link>
 
         <hr
-          class={clsx(
+          class={[
             "-mbs-2 text-white/10",
-            "tablet:row-start-2 tablet:col-span-3 tablet:mbs-0"
-          )}
+            "tablet:row-start-2 tablet:col-span-3 tablet:mbs-0",
+          ]}
         />
 
         <ul
           role="list"
           aria-labelledby="footer-title"
-          class={clsx(
+          class={[
             "flex flex-col items-center space-b-8 text-white text-body3 uppercase -mbs-2",
-            "tablet:col-span-2 tablet:mbs-0 tablet:flex-row tablet:justify-end tablet:space-b-0 tablet:space-i-10"
-          )}
+            "tablet:col-span-2 tablet:mbs-0 tablet:flex-row tablet:justify-end tablet:space-b-0 tablet:space-i-10",
+          ]}
         >
           {links.map((link) => (
             <li
@@ -86,11 +85,11 @@ export const Footer = component$(() => {
         </ul>
 
         <address
-          class={clsx(
+          class={[
             "flex flex-col space-b-10 text-white/50 not-italic items-center text-center",
             "tablet:flex-row tablet:space-b-0 tablet:space-i-10 tablet:col-span-2 tablet:text-start tablet:-mbs-2",
-            "desktop:space-i-50"
-          )}
+            "desktop:space-i-50",
+          ]}
         >
           <p>
             <b>Designo Central Office</b>

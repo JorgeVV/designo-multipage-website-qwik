@@ -10,7 +10,6 @@ import {
   useWatch$,
 } from "@builder.io/qwik";
 import { DocumentHead } from "@builder.io/qwik-city";
-import clsx from "clsx";
 import bgPatternTablet from "../../assets/contact/desktop/bg-pattern-hero-desktop.svg";
 import bgPatternMobile from "../../assets/contact/mobile/bg-pattern-hero-contact-mobile.svg";
 import { LocationsSection } from "../../components/locations-section";
@@ -39,11 +38,11 @@ export const BgImage = component$(() => (
       height={640}
     />
     <img
-      class={clsx(
+      class={[
         "absolute bs-full is-full block-start-0 inset-inline-0 object-none object-[20%_top]",
         "tablet:bs-[640px] tablet:is-[640px] tablet:-translate-x-[19%] tablet:-translate-y-[12%] tablet:object-contain",
-        "desktop:translate-x-0 desktop:translate-y-0 desktop:block-end-0 desktop:block-start-auto"
-      )}
+        "desktop:translate-x-0 desktop:translate-y-0 desktop:block-end-0 desktop:block-start-auto",
+      ]}
       src={bgPatternMobile}
       width={876}
       height={990}
@@ -78,11 +77,11 @@ export const ContactForm = component$(() => {
   return (
     <Section variant="full">
       <div
-        class={clsx(
+        class={[
           "relative flex flex-col pli-6 plb-18 bg-peach text-white overflow-hidden",
           "tablet:plb-18 tablet:pli-14 tablet:rounded-2xl",
-          "desktop:flex-row desktop:pli-24 desktop:plb-14"
-        )}
+          "desktop:flex-row desktop:pli-24 desktop:plb-14",
+        ]}
       >
         <BgImage />
         <div class="relative flex flex-col text-center space-b-6 tablet:text-start tablet:space-b-8 desktop:flex-1 desktop:justify-center">
@@ -126,11 +125,11 @@ export const ContactForm = component$(() => {
           </div>
           <button
             type="submit"
-            class={clsx(
+            class={[
               "uppercase min-is-[152px] text-h6 pli-6 plb-4 rounded-lg transition-colors duration-300 hover:text-white active:text-white self-center",
               "bg-white text-dark-grey hover:bg-light-peach active:bg-light-peach",
-              "tablet:self-end"
-            )}
+              "tablet:self-end",
+            ]}
           >
             Submit
           </button>
@@ -195,10 +194,10 @@ export const Input = component$((props: InputProps) => {
         ref={inputRef}
         name={name}
         id={name}
-        class={clsx(
+        class={[
           "block pbe-3 pli-4 is-full text-white bg-transparent border-none appearance-none peer resize-none mbs-3",
-          "focus:outline-none focus:ring-0"
-        )}
+          "focus:outline-none focus:ring-0",
+        ]}
         placeholder=" "
         required={required}
         inputMode={inputMode}
@@ -221,13 +220,13 @@ export const Input = component$((props: InputProps) => {
       />
       <label
         htmlFor={name}
-        class={clsx(
+        class={[
           "absolute motion-safe:duration-300 translate-x-4 scale-90 -z-10 origin-[0] transition-transform",
           "peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:text-white/50 peer-focus:scale-90 peer-focus:text-white",
           isTextArea
             ? "block-start-4 -translate-y-6 peer-focus:-translate-y-6"
-            : "block-end-3 -translate-y-4 peer-focus:-translate-y-4"
-        )}
+            : "block-end-3 -translate-y-4 peer-focus:-translate-y-4",
+        ]}
       >
         {label}
         {required && <small> (required)</small>}
@@ -236,10 +235,10 @@ export const Input = component$((props: InputProps) => {
         id={errorMessageId}
         key={store.errorMessage || undefined}
         role="alert"
-        class={clsx(
+        class={[
           "hidden select-none items-end space-i-2 shrink-0 animate-fadeIn italic text-body3 text-[12px] tracking-normal",
-          { "peer-invalid:flex": showError }
-        )}
+          showError ? "peer-invalid:flex" : "",
+        ]}
       >
         <span>{store.errorMessage}</span>
         <ErrorIcon />

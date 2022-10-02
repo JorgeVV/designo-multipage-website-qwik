@@ -1,6 +1,5 @@
 import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
-import clsx from "clsx";
 import friendlyImage from "../assets/home/desktop/illustration-friendly.svg";
 import passionateImage from "../assets/home/desktop/illustration-passionate.svg";
 import resourcefulImage from "../assets/home/desktop/illustration-resourceful.svg";
@@ -23,11 +22,11 @@ export default component$(() => {
 export const HeroBackgroundPattern = component$(() => {
   return (
     <svg
-      class={clsx(
+      class={[
         "absolute inline-start-0 inset-block-25",
         "tablet:-inline-end-32 tablet:inline-start-auto",
-        "desktop:inline-end-0 desktop:inset-block-0 desktop:bs-full desktop:min-is-min"
-      )}
+        "desktop:inline-end-0 desktop:inset-block-0 desktop:bs-full desktop:min-is-min",
+      ].join(" ")}
       width="640"
       height="639"
       viewBox="0 0 640 639"
@@ -56,27 +55,27 @@ export const Hero = component$(() => {
   return (
     <Section variant="full">
       <div
-        class={clsx(
+        class={[
           "relative bg-peach is-full flex flex-col pli-6 items-center pbs-20 overflow-hidden",
           "tablet:rounded-2xl tablet:pbs-14 tablet:pli-14",
-          "desktop:flex-row desktop:plb-36 desktop:pli-24"
-        )}
+          "desktop:flex-row desktop:plb-36 desktop:pli-24",
+        ]}
       >
         <HeroBackgroundPattern />
         <div
-          class={clsx(
+          class={[
             "flex flex-col items-center text-white text-center z-10",
-            "desktop:text-start desktop:items-start tablet:max-is-xl"
-          )}
+            "desktop:text-start desktop:items-start tablet:max-is-xl",
+          ]}
         >
           <h1 class="text-h3 tablet:text-h1">
             Award-winning custom designs and digital branding solutions
           </h1>
           <p
-            class={clsx(
+            class={[
               "text-body2 mbs-3.5",
-              "tablet:mbs-6 tablet:text-body tablet:max-is-[444px]"
-            )}
+              "tablet:mbs-6 tablet:text-body tablet:max-is-[444px]",
+            ]}
           >
             With over 10 years in the industry, we are experienced in creating
             fully responsive websites, app design, and engaging brand
@@ -87,11 +86,11 @@ export const Hero = component$(() => {
           </div>
         </div>
         <div
-          class={clsx(
+          class={[
             "bs-93 mbs-20 relative mli-auto",
             "tablet:mbs-17 tablet:bs-96",
-            "desktop:bs-[16rem]"
-          )}
+            "desktop:bs-[16rem]",
+          ]}
         >
           <img
             class="is-full max-is-max drop-shadow-hero desktop:-translate-y-24"
@@ -133,29 +132,27 @@ export const WhyDesignoSection = component$(() => {
       <div>
         <h2 class="sr-only">Why Designo</h2>
         <ul
-          class={clsx(
+          class={[
             "flex flex-col items-center text-center space-b-20",
             "tablet:text-start",
-            "desktop:flex-row desktop:text-center desktop:space-b-0 desktop:space-i-8"
-          )}
+            "desktop:flex-row desktop:text-center desktop:space-b-0 desktop:space-i-8",
+          ]}
         >
           {reasons.map((reason, index) => (
             <li
               key={reason.title}
-              class={clsx(
+              class={[
                 "flex flex-col space-b-12",
                 "tablet:flex-row tablet:space-b-0 tablet:items-center tablet:space-i-12",
-                "desktop:flex-col desktop:space-i-0 desktop:space-b-12 desktop:flex-1"
-              )}
+                "desktop:flex-col desktop:space-i-0 desktop:space-b-12 desktop:flex-1",
+              ]}
             >
-              <div
-                class={clsx("relative flex justify-center", "tablet:shrink-0")}
-              >
+              <div class={["relative flex justify-center", "tablet:shrink-0"]}>
                 <img
-                  class={clsx("absolute -z-10", {
-                    "-rotate-90": index === 1,
-                    "rotate-90": index === 2,
-                  })}
+                  class={[
+                    "absolute -z-10",
+                    index === 1 ? "-rotate-90" : index === 2 ? "rotate-90" : "",
+                  ]}
                   src={bgPattern}
                   alt=""
                   width={200}
@@ -171,11 +168,7 @@ export const WhyDesignoSection = component$(() => {
                 />
               </div>
               <div
-                class={clsx(
-                  "space-b-8",
-                  "tablet:space-b-4",
-                  "desktop:space-b-8"
-                )}
+                class={["space-b-8", "tablet:space-b-4", "desktop:space-b-8"]}
               >
                 <h3 class="uppercase text-h5">{reason.title}</h3>
                 <p class="">{reason.description}</p>

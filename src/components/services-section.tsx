@@ -1,6 +1,5 @@
 import { component$ } from "@builder.io/qwik";
 import { Link } from "@builder.io/qwik-city";
-import clsx from "clsx";
 import appDesignDesktop from "../assets/home/desktop/image-app-design.webp";
 import graphicDesignDesktop from "../assets/home/desktop/image-graphic-design.webp";
 import webDesignDesktop from "../assets/home/desktop/image-web-design-large.webp";
@@ -72,23 +71,23 @@ export const ServicesSection = component$((props: ServicesSectionProps) => {
     <Section>
       <h2 class="sr-only">Our Services</h2>
       <ul
-        class={clsx(
+        class={[
           "grid grid-cols-1 gap-y-6",
           "desktop:gap-x-7 desktop:grid-cols-2",
-          showAll && "desktop:grid-rows-2 "
-        )}
+          showAll ? "desktop:grid-rows-2" : "",
+        ]}
       >
         {servicesToDisplay.map((service, index) => {
           const expandItem = showAll && index === 0;
           return (
             <li
               key={service.path}
-              class={clsx(
+              class={[
                 "relative plb-24 rounded-2xl overflow-hidden flex-col uppercase group flex justify-center items-center",
                 "tablet:plb-14",
                 "desktop:plb-25",
-                expandItem && "desktop:row-span-2"
-              )}
+                expandItem ? "desktop:row-span-2" : "",
+              ]}
             >
               <picture>
                 <source
@@ -108,32 +107,30 @@ export const ServicesSection = component$((props: ServicesSectionProps) => {
                   src={service.images.mobile}
                   alt=""
                   loading="lazy"
-                  class={clsx("absolute inset-0 object-cover bs-full is-full")}
+                  class={"absolute inset-0 object-cover bs-full is-full"}
                   width={328}
                   height={250}
                 />
               </picture>
-              <div className="absolute inset-0 bg-trueblack/50 transition-colors duration-300 group-hover:bg-peach/80 group-active:bg-peach/80" />
+              <div class="absolute inset-0 bg-trueblack/50 transition-colors duration-300 group-hover:bg-peach/80 group-active:bg-peach/80" />
               <Link
                 prefetch
                 href={service.path}
-                class={clsx(
+                class={[
                   "text-white text-center space-b-3 after:absolute after:inset-0 z-10",
-                  "tablet:space-b-6"
-                )}
+                  "tablet:space-b-6",
+                ]}
               >
-                <h3 class={clsx("text-h3", "tablet:text-h2")}>
-                  {service.title}
-                </h3>
+                <h3 class={["text-h3", "tablet:text-h2"]}>{service.title}</h3>
                 <span class="flex text-h6 tracking-[5px] items-center justify-center">
                   View projects
                   <svg
                     width="7"
                     height="10"
-                    class={clsx(
+                    class={[
                       "text-peach transition-colors duration-300 group-hover:text-white group-active:text-white mis-4",
-                      "tablet:mis-5"
-                    )}
+                      "tablet:mis-5",
+                    ].join(" ")}
                     aria-hidden="true"
                   >
                     <path

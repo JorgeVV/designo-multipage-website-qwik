@@ -1,5 +1,4 @@
 import { component$ } from "@builder.io/qwik";
-import clsx from "clsx";
 import bgPatternMobile from "../assets/shared/mobile/bg-pattern-design-pages-intro-mobile.svg";
 import bgPatternTablet from "../assets/shared/tablet/bg-pattern-design-pages-intro-tablet.svg";
 import { Section } from "./section";
@@ -16,10 +15,10 @@ export const DesignPageHero = component$((props: DesignPageHeroProps) => {
   return (
     <Section variant="full">
       <div
-        class={clsx(
+        class={[
           "relative bg-peach is-full flex flex-col pli-6 items-center plb-26",
-          "tablet:rounded-2xl tablet:plb-16 tablet:pli-14"
-        )}
+          "tablet:rounded-2xl tablet:plb-16 tablet:pli-14",
+        ]}
       >
         <picture>
           <source
@@ -35,11 +34,11 @@ export const DesignPageHero = component$((props: DesignPageHeroProps) => {
             height={584}
           />
           <img
-            class={clsx(
+            class={[
               "absolute inset-0 bs-full is-full object-none object-right-top",
               "tablet:object-[18%_center]",
-              desktopClass
-            )}
+              desktopClass ?? "",
+            ]}
             src={bgPatternMobile}
             srcSet={`${bgPatternMobile} 375w`}
             alt=""
@@ -49,17 +48,17 @@ export const DesignPageHero = component$((props: DesignPageHeroProps) => {
           />
         </picture>
         <div
-          class={clsx(
+          class={[
             "flex flex-col items-center text-white text-center z-10",
-            "tablet:max-is-xl"
-          )}
+            "tablet:max-is-xl",
+          ]}
         >
           <h1 class="text-h3 tablet:text-h1">{title}</h1>
           <p
-            class={clsx(
+            class={[
               "text-body2 mbs-6",
-              "tablet:mbs-6 tablet:text-body tablet:max-is-[444px]"
-            )}
+              "tablet:mbs-6 tablet:text-body tablet:max-is-[444px]",
+            ]}
           >
             {text}
           </p>
