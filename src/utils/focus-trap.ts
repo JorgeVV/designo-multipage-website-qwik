@@ -46,7 +46,7 @@ const detachHandler = () => {
   document.removeEventListener("focusin", emitChange);
 };
 
-const focusLock = {
+const focusTrap = {
   on(domNode: HTMLElement) {
     if (instances.length === 0) {
       attachHandler();
@@ -66,4 +66,4 @@ const focusLock = {
   },
 };
 
-export default focusLock;
+export default focusTrap;
