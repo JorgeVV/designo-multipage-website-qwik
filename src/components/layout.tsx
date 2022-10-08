@@ -1,10 +1,15 @@
 import { component$, Slot } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
+import logoDark from "~/assets/shared/desktop/logo-dark.webp";
+import { ContactCtaSection } from "./contact-cta-section";
 import { Footer } from "./footer";
 import { Header } from "./header";
-import logoDark from "../assets/shared/desktop/logo-dark.webp";
 
-export default component$(() => {
+export interface LayoutProps {
+  showContactCta?: boolean;
+}
+
+export default component$((props: LayoutProps) => {
   return (
     <div class="min-bs-full flex flex-col">
       <Header />
@@ -13,7 +18,7 @@ export default component$(() => {
           <div class="bg-layout" />
           <Slot />
         </div>
-        <Slot name="contactCta" />
+        {props.showContactCta && <ContactCtaSection />}
       </main>
       <Footer />
     </div>
