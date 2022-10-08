@@ -1,9 +1,8 @@
 # Build
-build
-dist
-lib
-server
-functions/**/*.js
+/dist
+/lib
+/lib-types
+/server
 
 # Development
 node_modules
@@ -37,6 +36,7 @@ lerna-debug.log*
 # Yarn
 .yarn/*
 !.yarn/releases
+
 # Local Netlify folder
 .netlify
 netlify
