@@ -10,10 +10,10 @@ import {
   useWatch$,
 } from "@builder.io/qwik";
 import { DocumentHead } from "@builder.io/qwik-city";
-import bgPatternTablet from "../../assets/contact/desktop/bg-pattern-hero-desktop.svg";
-import bgPatternMobile from "../../assets/contact/mobile/bg-pattern-hero-contact-mobile.svg";
-import { LocationsSection } from "../../components/locations-section";
-import { Section } from "../../components/section";
+import bgPatternTablet from "~/assets/contact/desktop/bg-pattern-hero-desktop.svg";
+import bgPatternMobile from "~/assets/contact/mobile/bg-pattern-hero-contact-mobile.svg";
+import { LocationsSection } from "~/components/locations-section";
+import { Section } from "~/components/section";
 
 export default component$(() => {
   return (

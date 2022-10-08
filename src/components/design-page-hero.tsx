@@ -1,6 +1,6 @@
 import { component$ } from "@builder.io/qwik";
-import bgPatternMobile from "../assets/shared/mobile/bg-pattern-design-pages-intro-mobile.svg";
-import bgPatternTablet from "../assets/shared/tablet/bg-pattern-design-pages-intro-tablet.svg";
+import bgPatternMobile from "~/assets/shared/mobile/bg-pattern-design-pages-intro-mobile.svg";
+import bgPatternTablet from "~/assets/shared/tablet/bg-pattern-design-pages-intro-tablet.svg";
 import { Section } from "./section";
 
 export interface DesignPageHeroProps {

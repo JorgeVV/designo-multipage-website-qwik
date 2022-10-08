@@ -1,15 +1,15 @@
 import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
-import desktopDecoration from "../../assets/web-design/desktop/bg-pattern-intro-web.svg";
-import projectImage5 from "../../assets/web-design/desktop/image-blogr.webp";
-import projectImage4 from "../../assets/web-design/desktop/image-builder.webp";
-import projectImage6 from "../../assets/web-design/desktop/image-camp.webp";
-import projectImage1 from "../../assets/web-design/desktop/image-express.webp";
-import projectImage3 from "../../assets/web-design/desktop/image-photon.webp";
-import projectImage2 from "../../assets/web-design/desktop/image-transfer.webp";
-import { DesignPageHero, preloads } from "../../components/design-page-hero";
-import { ProjectsShowcaseSection } from "../../components/projects-showcase-section";
-import { ServicesSection } from "../../components/services-section";
+import desktopDecoration from "~/assets/web-design/desktop/bg-pattern-intro-web.svg";
+import projectImage5 from "~/assets/web-design/desktop/image-blogr.webp";
+import projectImage4 from "~/assets/web-design/desktop/image-builder.webp";
+import projectImage6 from "~/assets/web-design/desktop/image-camp.webp";
+import projectImage1 from "~/assets/web-design/desktop/image-express.webp";
+import projectImage3 from "~/assets/web-design/desktop/image-photon.webp";
+import projectImage2 from "~/assets/web-design/desktop/image-transfer.webp";
+import { DesignPageHero, preloads } from "~/components/design-page-hero";
+import { ProjectsShowcaseSection } from "~/components/projects-showcase-section";
+import { ServicesSection } from "~/components/services-section";
 
 export const projects = [
   {

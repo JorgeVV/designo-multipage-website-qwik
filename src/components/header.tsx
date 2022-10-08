@@ -10,8 +10,8 @@ import {
 import { Link, useLocation } from "@builder.io/qwik-city";
 import { hideOthers } from "aria-hidden";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
-import logoDark from "../assets/shared/desktop/logo-dark.webp";
-import focusTrap from "../utils/focus-trap";
+import logoDark from "~/assets/shared/desktop/logo-dark.webp";
+import focusTrap from "~/utils/focus-trap";
 
 export const links = [
   { label: "Our Company", path: "/about" },

@@ -1,9 +1,9 @@
 import { component$ } from "@builder.io/qwik";
 import type { DocumentLink } from "@builder.io/qwik-city";
 import { useDocumentHead, useLocation } from "@builder.io/qwik-city";
-import favicon from "../assets/favicon.png";
-import jost500 from "../assets/fonts/jost/jost-v14-latin-500.woff2";
-import jostRegular from "../assets/fonts/jost/jost-v14-latin-regular.woff2";
+import favicon from "~/assets/favicon.png";
+import jost500 from "~/assets/fonts/jost/jost-v14-latin-500.woff2";
+import jostRegular from "~/assets/fonts/jost/jost-v14-latin-regular.woff2";
 
 export const Head = component$(() => {
   const head = useDocumentHead();

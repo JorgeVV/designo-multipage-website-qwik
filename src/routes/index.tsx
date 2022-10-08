@@ -1,13 +1,13 @@
 import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
-import friendlyImage from "../assets/home/desktop/illustration-friendly.svg";
-import passionateImage from "../assets/home/desktop/illustration-passionate.svg";
-import resourcefulImage from "../assets/home/desktop/illustration-resourceful.svg";
-import heroImg from "../assets/home/desktop/image-hero-phone.webp";
-import bgPattern from "../assets/shared/desktop/bg-pattern-small-circle.svg";
-import { LinkButton } from "../components/link-button";
-import { Section } from "../components/section";
-import { ServicesSection } from "../components/services-section";
+import friendlyImage from "~/assets/home/desktop/illustration-friendly.svg";
+import passionateImage from "~/assets/home/desktop/illustration-passionate.svg";
+import resourcefulImage from "~/assets/home/desktop/illustration-resourceful.svg";
+import heroImg from "~/assets/home/desktop/image-hero-phone.webp";
+import bgPattern from "~/assets/shared/desktop/bg-pattern-small-circle.svg";
+import { LinkButton } from "~/components/link-button";
+import { Section } from "~/components/section";
+import { ServicesSection } from "~/components/services-section";
 
 export default component$(() => {
   return (

@@ -1,11 +1,11 @@
 import { component$ } from "@builder.io/qwik";
 import { Link, useLocation } from "@builder.io/qwik-city";
-import fbIcon from "../assets/shared/desktop/icon-facebook.svg";
-import insIcon from "../assets/shared/desktop/icon-instagram.svg";
-import pinIcon from "../assets/shared/desktop/icon-pinterest.svg";
-import twIcon from "../assets/shared/desktop/icon-twitter.svg";
-import ytIcon from "../assets/shared/desktop/icon-youtube.svg";
-import logoLight from "../assets/shared/desktop/logo-light.webp";
+import fbIcon from "~/assets/shared/desktop/icon-facebook.svg";
+import insIcon from "~/assets/shared/desktop/icon-instagram.svg";
+import pinIcon from "~/assets/shared/desktop/icon-pinterest.svg";
+import twIcon from "~/assets/shared/desktop/icon-twitter.svg";
+import ytIcon from "~/assets/shared/desktop/icon-youtube.svg";
+import logoLight from "~/assets/shared/desktop/logo-light.webp";
 
 export const links = [
   { label: "Our Company", path: "/about" },

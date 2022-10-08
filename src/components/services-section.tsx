@@ -1,14 +1,14 @@
 import { component$ } from "@builder.io/qwik";
 import { Link } from "@builder.io/qwik-city";
-import appDesignDesktop from "../assets/home/desktop/image-app-design.webp";
-import graphicDesignDesktop from "../assets/home/desktop/image-graphic-design.webp";
-import webDesignDesktop from "../assets/home/desktop/image-web-design-large.webp";
-import appDesignMobile from "../assets/home/mobile/image-app-design.webp";
-import graphicDesignMobile from "../assets/home/mobile/image-graphic-design.webp";
-import webDesignMobile from "../assets/home/mobile/image-web-design.webp";
-import appDesignTablet from "../assets/home/tablet/image-app-design.webp";
-import graphicDesignTablet from "../assets/home/tablet/image-graphic-design.webp";
-import webDesignTablet from "../assets/home/tablet/image-web-design.webp";
+import appDesignDesktop from "~/assets/home/desktop/image-app-design.webp";
+import graphicDesignDesktop from "~/assets/home/desktop/image-graphic-design.webp";
+import webDesignDesktop from "~/assets/home/desktop/image-web-design-large.webp";
+import appDesignMobile from "~/assets/home/mobile/image-app-design.webp";
+import graphicDesignMobile from "~/assets/home/mobile/image-graphic-design.webp";
+import webDesignMobile from "~/assets/home/mobile/image-web-design.webp";
+import appDesignTablet from "~/assets/home/tablet/image-app-design.webp";
+import graphicDesignTablet from "~/assets/home/tablet/image-graphic-design.webp";
+import webDesignTablet from "~/assets/home/tablet/image-web-design.webp";
 import { Section } from "./section";
 
 export type ServiceType = "web-design" | "app-design" | "graphic-design";

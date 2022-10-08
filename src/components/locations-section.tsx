@@ -1,10 +1,10 @@
 import { component$ } from "@builder.io/qwik";
-import bgPattern from "../assets/shared/desktop/bg-pattern-small-circle.svg";
-import auImage from "../assets/shared/desktop/illustration-australia.svg";
-import caImage from "../assets/shared/desktop/illustration-canada.svg";
-import ukImage from "../assets/shared/desktop/illustration-united-kingdom.svg";
-import { LinkButton } from "../components/link-button";
-import { Section } from "../components/section";
+import bgPattern from "~/assets/shared/desktop/bg-pattern-small-circle.svg";
+import auImage from "~/assets/shared/desktop/illustration-australia.svg";
+import caImage from "~/assets/shared/desktop/illustration-canada.svg";
+import ukImage from "~/assets/shared/desktop/illustration-united-kingdom.svg";
+import { LinkButton } from "~/components/link-button";
+import { Section } from "~/components/section";
 
 export const locations = [
   { key: "CA", name: "Canada", image: caImage },

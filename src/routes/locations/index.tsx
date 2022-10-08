@@ -1,13 +1,13 @@
 import { component$ } from "@builder.io/qwik";
 import { DocumentHead } from "@builder.io/qwik-city";
-import auOfficeMapSquare from "../../assets/locations/desktop/image-map-australia.webp";
-import caOfficeMapSquare from "../../assets/locations/desktop/image-map-canada.webp";
-import ukOfficeMapSquare from "../../assets/locations/desktop/image-map-united-kingdom.webp";
-import auOfficeMapRect from "../../assets/locations/tablet/image-map-australia.webp";
-import caOfficeMapRect from "../../assets/locations/tablet/image-map-canada.webp";
-import ukOfficeMapRect from "../../assets/locations/tablet/image-map-united-kingdom.webp";
-import bgPattern from "../../assets/shared/desktop/bg-pattern-three-circles.svg";
-import { Section } from "../../components/section";
+import auOfficeMapSquare from "~/assets/locations/desktop/image-map-australia.webp";
+import caOfficeMapSquare from "~/assets/locations/desktop/image-map-canada.webp";
+import ukOfficeMapSquare from "~/assets/locations/desktop/image-map-united-kingdom.webp";
+import auOfficeMapRect from "~/assets/locations/tablet/image-map-australia.webp";
+import caOfficeMapRect from "~/assets/locations/tablet/image-map-canada.webp";
+import ukOfficeMapRect from "~/assets/locations/tablet/image-map-united-kingdom.webp";
+import bgPattern from "~/assets/shared/desktop/bg-pattern-three-circles.svg";
+import { Section } from "~/components/section";
 
 export default component$(() => {
   return (

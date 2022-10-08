@@ -1,19 +1,19 @@
 import { component$ } from "@builder.io/qwik";
 import { DocumentHead } from "@builder.io/qwik-city";
-import heroDecorationTablet from "../../assets/about/desktop/bg-pattern-hero-about-desktop.svg";
-import heroImageDesktop from "../../assets/about/desktop/image-about-hero.webp";
-import realDealImageDesktop from "../../assets/about/desktop/image-real-deal.webp";
-import wordClassImageDesktop from "../../assets/about/desktop/image-world-class-talent.webp";
-import heroDecorationMobile from "../../assets/about/mobile/bg-pattern-hero-about-mobile.svg";
-import heroImageMobile from "../../assets/about/mobile/image-about-hero.webp";
-import realDealImageMobile from "../../assets/about/mobile/image-real-deal.webp";
-import wordClassImageMobile from "../../assets/about/mobile/image-world-class-talent.webp";
-import heroImageTablet from "../../assets/about/tablet/image-about-hero.webp";
-import realDealImageTablet from "../../assets/about/tablet/image-real-deal.webp";
-import wordClassImageTablet from "../../assets/about/tablet/image-world-class-talent.webp";
-import bgPattern from "../../assets/shared/desktop/bg-pattern-three-circles.svg";
-import { LocationsSection } from "../../components/locations-section";
-import { Section } from "../../components/section";
+import heroDecorationTablet from "~/assets/about/desktop/bg-pattern-hero-about-desktop.svg";
+import heroImageDesktop from "~/assets/about/desktop/image-about-hero.webp";
+import realDealImageDesktop from "~/assets/about/desktop/image-real-deal.webp";
+import wordClassImageDesktop from "~/assets/about/desktop/image-world-class-talent.webp";
+import heroDecorationMobile from "~/assets/about/mobile/bg-pattern-hero-about-mobile.svg";
+import heroImageMobile from "~/assets/about/mobile/image-about-hero.webp";
+import realDealImageMobile from "~/assets/about/mobile/image-real-deal.webp";
+import wordClassImageMobile from "~/assets/about/mobile/image-world-class-talent.webp";
+import heroImageTablet from "~/assets/about/tablet/image-about-hero.webp";
+import realDealImageTablet from "~/assets/about/tablet/image-real-deal.webp";
+import wordClassImageTablet from "~/assets/about/tablet/image-world-class-talent.webp";
+import bgPattern from "~/assets/shared/desktop/bg-pattern-three-circles.svg";
+import { LocationsSection } from "~/components/locations-section";
+import { Section } from "~/components/section";
 
 export default component$(() => {
   return (

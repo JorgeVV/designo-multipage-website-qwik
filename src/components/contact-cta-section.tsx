@@ -1,5 +1,5 @@
 import { component$ } from "@builder.io/qwik";
-import bgPattern from "../assets/shared/desktop/bg-pattern-call-to-action.svg";
+import bgPattern from "~/assets/shared/desktop/bg-pattern-call-to-action.svg";
 import { LinkButton } from "./link-button";
 import { Section } from "./section";
 
