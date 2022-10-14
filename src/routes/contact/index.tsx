@@ -5,7 +5,7 @@ import {
   useClientEffect$,
   useContext,
   useContextProvider,
-  useRef,
+  useSignal,
   useStore,
   useWatch$,
 } from "@builder.io/qwik";
@@ -55,11 +55,11 @@ export const BgImage = component$(() => (
 export const ContactForm = component$(() => {
   const store = useStore({ noValidate: false, triedSubmit: false });
   useContextProvider(formContext, store);
-  const formRef = useRef<HTMLFormElement>();
+  const formRef = useSignal<HTMLFormElement>();
 
   useClientEffect$(() => {
     store.noValidate = true;
-    const form = formRef.current;
+    const form = formRef.value;
     const handleSubmit = (e: SubmitEvent) => {
       store.triedSubmit = true;
       const form = e.target as HTMLFormElement;
@@ -157,23 +157,22 @@ export const Input = component$((props: InputProps) => {
     inputMode,
     autoComplete,
   } = props;
-  const store = useStore<{ blurred: boolean; errorMessage: string | null }>({
-    blurred: false,
-    errorMessage: null,
-  });
+  const isBlurred = useSignal(false);
+  const errorMessage = useSignal("");
   const form = useContext(formContext);
-  const inputRef = useRef<HTMLInputElement | HTMLTextAreaElement>();
+  const inputRef = useSignal<HTMLInputElement | HTMLTextAreaElement>();
   const isTextArea = type === "textarea";
   const Component = isTextArea ? "textarea" : "input";
   const errorMessageId = `${name}-error`;
-  const showError = (store.blurred || form.triedSubmit) && store.errorMessage;
+  const showError =
+    (isBlurred.value || form.triedSubmit) && !!errorMessage.value;
 
   const handleInput = $(() => {
-    const inputEl = inputRef.current!;
+    const inputEl = inputRef.value!;
     const { validity, validationMessage } = inputEl;
     const { valid, typeMismatch, valueMissing } = validity;
-    store.errorMessage = valid
-      ? null
+    errorMessage.value = valid
+      ? ""
       : typeMismatch
       ? "Please use a valid email address"
       : valueMissing
@@ -182,7 +181,7 @@ export const Input = component$((props: InputProps) => {
   });
 
   useWatch$(({ track }) => {
-    const triedSubmit = track(form, "triedSubmit");
+    const triedSubmit = track(() => form.triedSubmit);
     if (triedSubmit) {
       handleInput();
     }
@@ -203,7 +202,9 @@ export const Input = component$((props: InputProps) => {
         inputMode={inputMode}
         autoComplete={autoComplete}
         maxLength={250}
-        onBlur$={() => (store.blurred = true)}
+        onBlur$={() => {
+          isBlurred.value = true;
+        }}
         onInput$={handleInput}
         {...(isTextArea
           ? {
@@ -219,7 +220,7 @@ export const Input = component$((props: InputProps) => {
           : {})}
       />
       <label
-        htmlFor={name}
+        for={name}
         class={[
           "absolute motion-safe:duration-300 translate-x-4 scale-90 -z-10 origin-[0] transition-transform",
           "peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:text-white/50 peer-focus:scale-90 peer-focus:text-white",
@@ -233,14 +234,14 @@ export const Input = component$((props: InputProps) => {
       </label>
       <p
         id={errorMessageId}
-        key={store.errorMessage || undefined}
+        key={errorMessage.value || undefined}
         role="alert"
         class={[
           "hidden select-none items-end space-i-2 shrink-0 animate-fadeIn italic text-body3 text-[12px] tracking-normal",
           showError ? "peer-invalid:flex" : "",
         ]}
       >
-        <span>{store.errorMessage}</span>
+        <span>{errorMessage.value}</span>
         <ErrorIcon />
       </p>
       <div class="absolute block-end-0 bs-px is-full bg-white peer-focus:bs-[3px]" />

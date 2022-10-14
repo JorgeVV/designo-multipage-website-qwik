@@ -4,8 +4,7 @@ import {
   QRL,
   useClientEffect$,
   useOnWindow,
-  useRef,
-  useStore,
+  useSignal,
 } from "@builder.io/qwik";
 import { Link, useLocation } from "@builder.io/qwik-city";
 import { hideOthers } from "aria-hidden";
@@ -20,10 +19,11 @@ export const links = [
 ];
 
 export const Header = component$(() => {
-  const state = useStore({ shadowVisible: false, menuOpen: false });
+  const isShadowVisible = useSignal(false);
+  const isMenuOpen = useSignal(false);
   const location = useLocation();
   const toggleMenu = $(() => {
-    state.menuOpen = !state.menuOpen;
+    isMenuOpen.value = !isMenuOpen.value;
   });
 
   return (
@@ -38,10 +38,10 @@ export const Header = component$(() => {
         class={[
           "is-full bs-full sticky block-start-0 inset-inline-0 tablet:-block-start-8 z-50 bg-white",
           "before:absolute before:-z-10 before:inset-0 before:shadow-sm before:transition-opacity before:duration-300",
-          state.shadowVisible ? "before:opacity-100" : "before:opacity-0",
+          isShadowVisible.value ? "before:opacity-100" : "before:opacity-0",
         ]}
         window:onScroll$={() => {
-          state.shadowVisible = window.scrollY > 60;
+          isShadowVisible.value = window.scrollY > 60;
         }}
       >
         <div class="mli-auto tablet:max-is-screen-tablet desktop:max-is-screen-desktop">
@@ -103,7 +103,7 @@ export const Header = component$(() => {
               <button
                 class={[
                   "outline-offset-8 tablet:hidden text-black",
-                  state.menuOpen ? "hidden" : "",
+                  isMenuOpen.value ? "hidden" : "",
                 ]}
                 onClick$={toggleMenu}
               >
@@ -119,7 +119,7 @@ export const Header = component$(() => {
             </div>
           </div>
         </div>
-        {state.menuOpen && <MobileMenu onCloseMenu$={toggleMenu} />}
+        {isMenuOpen.value && <MobileMenu onCloseMenu$={toggleMenu} />}
       </header>
     </>
   );
@@ -131,11 +131,11 @@ interface MobileMenuProps {
 
 export const MobileMenu = component$((props: MobileMenuProps) => {
   const { onCloseMenu$ } = props;
-  const menuRef = useRef<HTMLElement>();
+  const menuRef = useSignal<HTMLElement>();
   const location = useLocation();
 
   useClientEffect$(() => {
-    const menu = menuRef.current!;
+    const menu = menuRef.value!;
     disableBodyScroll(document.body, { reserveScrollBarGap: true });
     focusTrap.on(menu);
     const undoHidden = hideOthers(menu);
