@@ -16,7 +16,7 @@ export const ProjectsShowcaseSection = component$(
     const { projects } = props;
     return (
       <Section>
-        <div className="grid gap-y-10 desktop:grid-cols-3 desktop:gap-8">
+        <div class="grid gap-y-10 desktop:grid-cols-3 desktop:gap-8">
           {projects.map((project) => (
             <article
               key={project.title}
