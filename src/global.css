@@ -59,15 +59,23 @@
   }
 }
 
-@media screen(desktop) {
-  .bg-layout::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: calc(theme("zIndex.50") * -1);
-    height: max(0px, min(100%, calc((100% - 1800px) * 9999)));
-    background-image: url("./assets/shared/desktop/bg-pattern-leaf.svg");
-    background-position: left 345px;
-    background-repeat: no-repeat;
+@layer components {
+  @media screen(desktop) {
+    .bg-layout::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: calc(theme("zIndex.50") * -1);
+      height: max(0px, min(100%, calc((100% - 1800px) * 9999)));
+      background-image: url("./assets/shared/desktop/bg-pattern-leaf.svg");
+      background-position: left 345px;
+      background-repeat: no-repeat;
+    }
+  }
+}
+
+@layer utilities {
+  .content-vibility-auto {
+    content-visibility: auto;
   }
 }
