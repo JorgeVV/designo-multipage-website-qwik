@@ -12,7 +12,7 @@ export const Section = component$((props: SectionProps) => {
   return (
     <Wrapper
       class={[
-        "content-vibility-auto items-center",
+        "items-center",
         "tablet:first:pbs-8",
         variant !== "full-bleed" ? "tablet:pli-10 desktop:pli-41" : "",
         {

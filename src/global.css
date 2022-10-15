@@ -73,9 +73,3 @@
     }
   }
 }
-
-@layer utilities {
-  .content-vibility-auto {
-    content-visibility: auto;
-  }
-}
