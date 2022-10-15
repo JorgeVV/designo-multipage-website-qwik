@@ -14,10 +14,7 @@ export default component$(() => {
       <head>
         <Head />
       </head>
-      <body
-        lang="en"
-        class="antialiased bg-white text-body text-dark-grey bs-full"
-      >
+      <body class="antialiased bg-white text-body text-dark-grey bs-full">
         <RouterOutlet />
         <ServiceWorkerRegister />
       </body>
