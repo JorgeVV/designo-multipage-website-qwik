@@ -57,9 +57,9 @@ export const ContactForm = component$(() => {
   useContextProvider(formContext, store);
   const formRef = useSignal<HTMLFormElement>();
 
-  useClientEffect$(() => {
+  useClientEffect$(({ track }) => {
     store.noValidate = true;
-    const form = formRef.value;
+    const form = track(() => formRef.value);
     const handleSubmit = (e: SubmitEvent) => {
       store.triedSubmit = true;
       const form = e.target as HTMLFormElement;
