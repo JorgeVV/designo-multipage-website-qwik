@@ -249,7 +249,7 @@ export const Input = component$((props: InputProps) => {
   );
 });
 
-export function ErrorIcon() {
+export const ErrorIcon = component$(() => {
   return (
     <svg width="20" height="20" aria-hidden="true">
       <g fill="none" fill-rule="evenodd">
@@ -258,7 +258,7 @@ export function ErrorIcon() {
       </g>
     </svg>
   );
-}
+});
 
 export const head: DocumentHead = () => {
   return {
