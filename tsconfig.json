@@ -8,6 +8,7 @@
     "jsxImportSource": "@builder.io/qwik",
     "strict": true,
     "resolveJsonModule": true,
+    "noEmit": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
     "skipLibCheck": true,
@@ -17,6 +18,5 @@
     "paths": {
       "~/*": ["./src/*"]
     }
-  },
-  "include": ["src"]
+  }
 }
