@@ -2,6 +2,7 @@ import {
   $,
   component$,
   QRL,
+  Signal,
   useClientEffect$,
   useOnWindow,
   useSignal,
@@ -20,134 +21,160 @@ export const links = [
 
 export const Header = component$(() => {
   const isShadowVisible = useSignal(false);
+  const interactiveContainerRef = useSignal<HTMLElement>();
   const isMenuOpen = useSignal(false);
   const location = useLocation();
-  const toggleMenu = $(() => {
-    isMenuOpen.value = !isMenuOpen.value;
+
+  const closeMenu = $(() => {
+    isMenuOpen.value = false;
   });
 
   return (
-    <>
-      <header
-        class={[
-          "is-full bs-full sticky block-start-0 inset-inline-0 tablet:-block-start-8 z-50 bg-white",
-          "before:absolute before:-z-10 before:inset-0 before:shadow-sm before:transition-opacity before:duration-300",
-          isShadowVisible.value ? "before:opacity-100" : "before:opacity-0",
-        ]}
-        window:onScroll$={() => {
-          isShadowVisible.value = window.scrollY > 60;
-        }}
-      >
-        <div class="mli-auto tablet:max-is-screen-tablet desktop:max-is-screen-desktop">
-          <a
-            class={[
-              "skip-link p-2 bg-white fixed block-start-24 underline underline-offset-2",
-              "tablet:mis-10 tablet:block-start-8 tablet:-translate-y-1/2",
-              "desktop:mis-41"
-            ]}
-            href="#main-content"
+    <header
+      class={[
+        "is-full bs-full sticky block-start-0 inset-inline-0 tablet:-block-start-8 z-50 bg-white",
+        "before:absolute before:-z-10 before:inset-0 before:shadow-sm before:transition-opacity before:duration-300",
+        isShadowVisible.value ? "before:opacity-100" : "before:opacity-0",
+      ]}
+      window:onScroll$={() => {
+        isShadowVisible.value = window.scrollY > 60;
+      }}
+    >
+      <div class="mli-auto tablet:max-is-screen-tablet desktop:max-is-screen-desktop">
+        <a
+          class={[
+            "skip-link p-2 bg-white fixed block-start-24 underline underline-offset-2",
+            "tablet:mis-10 tablet:block-start-8 tablet:-translate-y-1/2",
+            "desktop:mis-41",
+          ]}
+          href="#main-content"
+        >
+          Skip to main content
+        </a>
+        <div
+          ref={interactiveContainerRef}
+          class={[
+            "flex pli-6 plb-8 items-center",
+            "tablet:pli-10 tablet:pbs-16",
+            "desktop:pli-41",
+          ]}
+        >
+          <Link
+            prefetch
+            href="/"
+            onClick$={closeMenu}
+            {...(location.pathname === "/"
+              ? {
+                  "aria-current": "page",
+                }
+              : {})}
           >
-            Skip to main content
-          </a>
-          <div
-            class={[
-              "flex pli-6 plb-8 items-center",
-              "tablet:pli-10 tablet:pbs-16",
-              "desktop:pli-41",
-            ]}
-          >
-            <Link
-              prefetch
-              href="/"
-              {...(location.pathname === "/"
-                ? {
-                    "aria-current": "page",
-                  }
-                : {})}
-            >
-              <span id="header-title" class="sr-only">
-                Designo
-              </span>
-              <img
-                src={logoDark}
-                alt=""
-                width={202}
-                height={27}
-                loading="eager"
-              />
-            </Link>
-            <div class="mis-auto flex">
-              <nav
-                role="navigation"
-                aria-labelledby="header-title"
-                class="hidden tablet:block"
-              >
-                <ul
-                  role="list"
-                  class="tablet:flex tablet:items-center tablet:space-i-10 tablet:uppercase tablet:text-body3 desktop:space-i-11"
-                >
-                  {links.map((link) => (
-                    <li key={link.path}>
-                      <Link
-                        prefetch
-                        href={link.path}
-                        class="inline-block hover:underline hover:underline-offset-2 p-4 -m-4"
-                        {...(location.pathname === link.path
-                          ? {
-                              "aria-current": "page",
-                            }
-                          : {})}
-                      >
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
-              <button
-                class={[
-                  "outline-offset-8 tablet:hidden text-black",
-                  isMenuOpen.value ? "hidden" : "",
-                ]}
-                onClick$={toggleMenu}
-              >
-                <span class="sr-only">Open navigation menu</span>
-                <svg width="20" height="20" aria-hidden="true">
-                  <path
-                    d="M0 0h24v4H0zM0 8h24v4H0zM0 16h24v4H0z"
-                    fill="currentColor"
-                    fill-rule="evenodd"
-                  />
-                </svg>
-              </button>
-            </div>
-          </div>
+            <span id="header-title" class="sr-only">
+              Designo
+            </span>
+            <img
+              src={logoDark}
+              alt=""
+              width={202}
+              height={27}
+              loading="eager"
+            />
+          </Link>
+          <input
+            id="nav-toggle"
+            type="checkbox"
+            class="peer sr-only"
+            checked={isMenuOpen.value}
+            onClick$={(event) => {
+              isMenuOpen.value = (event.target as HTMLInputElement).checked;
+            }}
+          />
+          <NavMenu
+            containerRef={interactiveContainerRef}
+            isMenuOpen={isMenuOpen.value}
+            onCloseMenu={closeMenu}
+          />
+
+          <NavMenuToggleLabel isMenuOpen={isMenuOpen.value} />
         </div>
-        {isMenuOpen.value && <MobileMenu onCloseMenu$={toggleMenu} />}
-      </header>
-    </>
+      </div>
+    </header>
   );
 });
 
-interface MobileMenuProps {
-  onCloseMenu$: QRL<VoidFunction>;
+interface NavMenuToggleLabelProps {
+  isMenuOpen: boolean;
 }
 
-export const MobileMenu = component$((props: MobileMenuProps) => {
-  const { onCloseMenu$ } = props;
-  const menuRef = useSignal<HTMLElement>();
+export const NavMenuToggleLabel = component$(
+  (props: NavMenuToggleLabelProps) => {
+    const { isMenuOpen } = props;
+    const peerSelectorClass = isMenuOpen ? "" : "";
+    const label = isMenuOpen
+      ? "peer-[:not(:checked)]:hidden"
+      : "peer-checked:hidden";
+
+    return (
+      <label
+        for="nav-toggle"
+        class={[
+          "outline-offset-4 text-black mis-auto outline-peach rounded-sm",
+          "peer-focus-visible:outline",
+          "tablet:hidden",
+          peerSelectorClass,
+        ]}
+      >
+        <span class="sr-only">{label}</span>
+        <svg width="20" height="20" aria-hidden="true">
+          {isMenuOpen ? (
+            <path
+              d="M17.071.1L19.9 2.93l-7.071 7.07 7.071 7.072-2.828 2.828L10 12.828l-7.071 7.071L.1 17.071 7.17 10 .102 2.929 2.929.1l7.07 7.07 7.072-7.07z"
+              fill="currentColor"
+              fill-rule="evenodd"
+            />
+          ) : (
+            <path
+              d="M0 0h24v4H0zM0 8h24v4H0zM0 16h24v4H0z"
+              fill="currentColor"
+              fill-rule="evenodd"
+            />
+          )}
+        </svg>
+      </label>
+    );
+  }
+);
+
+interface NavMenuProps {
+  onCloseMenu: QRL<VoidFunction>;
+  containerRef: Signal<HTMLElement | undefined>;
+  isMenuOpen: boolean;
+}
+
+export const NavMenu = component$((props: NavMenuProps) => {
+  const { onCloseMenu, containerRef } = props;
   const location = useLocation();
 
-  useClientEffect$(() => {
-    const menu = menuRef.value!;
-    disableBodyScroll(document.body, { reserveScrollBarGap: true });
-    focusTrap.on(menu);
-    const undoHidden = hideOthers(menu);
+  useClientEffect$(({ track }) => {
+    const container = track(() => containerRef.value!);
+    const isOpen = track(() => props.isMenuOpen);
+    const undo: { hidden: VoidFunction | null } = { hidden: null };
 
+    function handleFocus() {
+      if (isOpen) {
+        disableBodyScroll(document.body, { reserveScrollBarGap: true });
+        focusTrap.on(container);
+        undo.hidden = hideOthers(container);
+      } else {
+        undo.hidden?.();
+        focusTrap.off(container);
+        enableBodyScroll(document.body);
+      }
+    }
+
+    container.addEventListener("transitionend", handleFocus);
     return () => {
-      undoHidden();
-      focusTrap.off(menu);
-      enableBodyScroll(document.body);
+      container.removeEventListener("transitionend", handleFocus);
     };
   });
 
@@ -155,50 +182,52 @@ export const MobileMenu = component$((props: MobileMenuProps) => {
     "resize",
     $(() => {
       if (window.innerWidth >= 768) {
-        onCloseMenu$();
+        onCloseMenu();
       }
     })
   );
 
   return (
     <div
-      ref={menuRef}
-      class="fixed block-start-[92px] inset-inline-0 min-bs-screen animate-fadeIn tablet:hidden"
+      class={[
+        "fixed invisible block-start-[92px] inset-inline-0 min-bs-screen opacity-0 duration-[0.0001ms]",
+        "tablet:static tablet:visible tablet:opacity-100 tablet:mis-auto tablet:flex tablet:min-bs-min",
+        "max-tablet:peer-checked:transition-visibility max-tablet:peer-checked:duration-300 max-tablet:peer-checked:visible max-tablet:peer-checked:opacity-100",
+      ]}
       document:onKeyDown$={(event: KeyboardEvent) => {
         if (event.key === "Escape") {
-          onCloseMenu$();
+          onCloseMenu();
         }
       }}
     >
       <div
-        class="absolute bg-trueblack/50 inset-0 -z-10"
-        onClick$={onCloseMenu$}
+        class="absolute bg-trueblack/50 inset-0 -z-10 tablet:hidden"
+        onClick$={onCloseMenu}
       />
-      <button
-        class="outline-offset-8 text-black absolute block-start-0 inline-end-0 -translate-y-14 -translate-x-6"
-        onClick$={onCloseMenu$}
-      >
-        <span class="sr-only">Close navigation menu</span>
-        <svg width="20" height="20" aria-hidden="true">
-          <path
-            d="M17.071.1L19.9 2.93l-7.071 7.07 7.071 7.072-2.828 2.828L10 12.828l-7.071 7.071L.1 17.071 7.17 10 .102 2.929 2.929.1l7.07 7.07 7.072-7.07z"
-            fill="currentColor"
-            fill-rule="evenodd"
-          />
-        </svg>
-      </button>
       <nav
         role="navigation"
         aria-labelledby="header-title"
-        class="bg-black pli-6 plb-12 -mbs-px"
+        class={[
+          "bg-black pli-6 plb-12 -mbs-px",
+          "tablet:bg-transparent tablet:pli-0 tablet:plb-0 tablet:mbs-0",
+        ]}
       >
-        <ul class="flex flex-col uppercase space-b-8 text-white text-h4">
+        <ul
+          class={[
+            "flex flex-col uppercase space-b-8 text-white text-h4",
+            "tablet:text-black tablet:flex-row tablet:space-b-0 tablet:flex tablet:items-center tablet:space-i-10 tablet:uppercase tablet:text-body3",
+            "desktop:space-i-11",
+          ]}
+        >
           {links.map((link) => (
-            <li key={link.path} onClick$={onCloseMenu$}>
+            <li key={link.path} onClick$={onCloseMenu}>
               <Link
                 prefetch
                 href={link.path}
-                class="hover:underline hover:underline-offset-2 block is-full plb-4 -mlb-4"
+                class={[
+                  "block hover:underline hover:underline-offset-2 is-full plb-4 -mlb-4",
+                  "tablet:inline-block tablet:p-4 tablet:-m-4 tablet:is-max",
+                ]}
                 {...(location.pathname === link.path
                   ? {
                       "aria-current": "page",
