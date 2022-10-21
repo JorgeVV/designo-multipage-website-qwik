@@ -19,6 +19,8 @@ export const links = [
   { label: "Contact", path: "/contact" },
 ];
 
+export const NAV_TOGGLE_ID = "nav-toggle";
+
 export const Header = component$(() => {
   const isShadowVisible = useSignal(false);
   const interactiveContainerRef = useSignal<HTMLElement>();
@@ -81,7 +83,7 @@ export const Header = component$(() => {
             />
           </Link>
           <input
-            id="nav-toggle"
+            id={NAV_TOGGLE_ID}
             type="checkbox"
             class="peer sr-only"
             checked={isMenuOpen.value}
@@ -94,8 +96,8 @@ export const Header = component$(() => {
             isMenuOpen={isMenuOpen.value}
             onCloseMenu={closeMenu}
           />
-
-          <NavMenuToggleLabel isMenuOpen={isMenuOpen.value} />
+          <NavMenuToggleLabel action="open" />
+          <NavMenuToggleLabel action="close" />
         </div>
       </div>
     </header>
@@ -103,20 +105,21 @@ export const Header = component$(() => {
 });
 
 interface NavMenuToggleLabelProps {
-  isMenuOpen: boolean;
+  action: "open" | "close";
 }
 
 export const NavMenuToggleLabel = component$(
   (props: NavMenuToggleLabelProps) => {
-    const { isMenuOpen } = props;
-    const peerSelectorClass = isMenuOpen ? "" : "";
-    const label = isMenuOpen
-      ? "peer-[:not(:checked)]:hidden"
-      : "peer-checked:hidden";
+    const { action } = props;
+    const isOpen = action === "open";
+    const peerSelectorClass = isOpen
+      ? "peer-checked:hidden"
+      : "peer-[:not(:checked)]:hidden";
+    const label = `${isOpen ? "Open" : "Close"} navigation menu`;
 
     return (
       <label
-        for="nav-toggle"
+        for={NAV_TOGGLE_ID}
         class={[
           "outline-offset-4 text-black mis-auto outline-peach rounded-sm",
           "peer-focus-visible:outline",
@@ -126,15 +129,15 @@ export const NavMenuToggleLabel = component$(
       >
         <span class="sr-only">{label}</span>
         <svg width="20" height="20" aria-hidden="true">
-          {isMenuOpen ? (
+          {isOpen ? (
             <path
-              d="M17.071.1L19.9 2.93l-7.071 7.07 7.071 7.072-2.828 2.828L10 12.828l-7.071 7.071L.1 17.071 7.17 10 .102 2.929 2.929.1l7.07 7.07 7.072-7.07z"
+              d="M0 0h24v4H0zM0 8h24v4H0zM0 16h24v4H0z"
               fill="currentColor"
               fill-rule="evenodd"
             />
           ) : (
             <path
-              d="M0 0h24v4H0zM0 8h24v4H0zM0 16h24v4H0z"
+              d="M17.071.1L19.9 2.93l-7.071 7.07 7.071 7.072-2.828 2.828L10 12.828l-7.071 7.071L.1 17.071 7.17 10 .102 2.929 2.929.1l7.07 7.07 7.072-7.07z"
               fill="currentColor"
               fill-rule="evenodd"
             />
