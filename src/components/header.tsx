@@ -28,12 +28,6 @@ export const Header = component$(() => {
 
   return (
     <>
-      <a
-        class="skip-link p-2 bg-white fixed block-start-24 underline underline-offset-2"
-        href="#main-content"
-      >
-        Skip to main content
-      </a>
       <header
         class={[
           "is-full bs-full sticky block-start-0 inset-inline-0 tablet:-block-start-8 z-50 bg-white",
@@ -45,6 +39,16 @@ export const Header = component$(() => {
         }}
       >
         <div class="mli-auto tablet:max-is-screen-tablet desktop:max-is-screen-desktop">
+          <a
+            class={[
+              "skip-link p-2 bg-white fixed block-start-24 underline underline-offset-2",
+              "tablet:mis-10 tablet:block-start-8 tablet:-translate-y-1/2",
+              "desktop:mis-41"
+            ]}
+            href="#main-content"
+          >
+            Skip to main content
+          </a>
           <div
             class={[
               "flex pli-6 plb-8 items-center",
