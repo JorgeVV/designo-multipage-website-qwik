@@ -103,13 +103,16 @@ module.exports = {
         50: "12.5rem",
         93: "23.25rem",
       },
+      transitionProperty: {
+        visibility: "visibility, opacity",
+      },
       animation: {
-        fadeIn: "fadeOut 300ms ease-in-out reverse",
+        fadeIn: "fadeIn 300ms ease-in-out",
       },
       keyframes: {
-        fadeOut: {
-          "0%": { opacity: 1 },
-          "100%": { opacity: 0 },
+        fadeIn: {
+          "0%": { opacity: 0 },
+          "100%": { opacity: 1 },
         },
       },
       dropShadow: {
