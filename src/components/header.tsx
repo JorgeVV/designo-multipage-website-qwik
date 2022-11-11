@@ -157,24 +157,18 @@ export const NavMenu = component$((props: NavMenuProps) => {
   useClientEffect$(({ track }) => {
     const container = track(() => props.containerRef.value!);
     const isOpen = track(() => props.isMenuOpen);
-    const undo: { hidden: VoidFunction | null } = { hidden: null };
 
-    function handleFocus() {
-      if (isOpen) {
-        disableBodyScroll(document.body, { reserveScrollBarGap: true });
-        focusTrap.on(container);
-        undo.hidden = hideOthers(container);
-      } else {
-        undo.hidden?.();
+    if (isOpen) {
+      disableBodyScroll(document.body, { reserveScrollBarGap: true });
+      focusTrap.on(container);
+      const undoHide = hideOthers(container);
+
+      return () => {
+        undoHide();
         focusTrap.off(container);
         enableBodyScroll(document.body);
-      }
+      };
     }
-
-    container.addEventListener("transitionend", handleFocus);
-    return () => {
-      container.removeEventListener("transitionend", handleFocus);
-    };
   });
 
   useOnWindow(
