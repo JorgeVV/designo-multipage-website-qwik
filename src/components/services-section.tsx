@@ -117,7 +117,8 @@ export const ServicesSection = component$((props: ServicesSectionProps) => {
                 prefetch
                 href={service.path}
                 class={[
-                  "text-white text-center space-b-3 after:absolute after:inset-0 z-10",
+                  "inline-block text-white text-center space-b-3 after:absolute after:inset-0 z-10 rounded-md",
+                  "focus-visible:outline-white focus-visible:outline-offset-8",
                   "tablet:space-b-6",
                 ]}
               >

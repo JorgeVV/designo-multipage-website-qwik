@@ -128,6 +128,7 @@ export const ContactForm = component$(() => {
             class={[
               "uppercase min-is-[152px] text-h6 pli-6 plb-4 rounded-lg transition-colors duration-300 hover:text-white active:text-white self-center",
               "bg-white text-dark-grey hover:bg-light-peach active:bg-light-peach",
+              "focus-visible:outline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white",
               "tablet:self-end",
             ]}
           >
@@ -196,6 +197,7 @@ export const Input = component$((props: InputProps) => {
         class={[
           "block pbe-3 pli-4 is-full text-white bg-transparent border-none appearance-none peer resize-none mbs-3",
           "focus:outline-none focus:ring-0",
+          isTextArea ? "form-textarea" : "form-input",
         ]}
         placeholder=" "
         required={required}

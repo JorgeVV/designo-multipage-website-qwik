@@ -45,8 +45,9 @@ export const Header = component$(() => {
       <div class="mli-auto tablet:max-is-screen-tablet desktop:max-is-screen-desktop">
         <a
           class={[
-            "skip-link p-2 bg-white fixed block-start-24 underline underline-offset-2",
-            "tablet:mis-10 tablet:block-start-8 tablet:-translate-y-1/2",
+            "skip-link p-2 bg-white fixed block-start-24 underline underline-offset-2 mis-6",
+            "focus-visible:outline-black focus-visible:outline-1",
+            "tablet:focus-visible:outline-peach tablet:mis-10 tablet:block-start-8 tablet:-translate-y-1/2",
             "desktop:mis-41",
           ]}
           href="#main-content"
@@ -62,6 +63,7 @@ export const Header = component$(() => {
           ]}
         >
           <Link
+            class="focus-visible:outline-peach focus-visible:outline-offset-8"
             prefetch
             href="/"
             onClick$={closeMenu}
@@ -228,8 +230,10 @@ export const NavMenu = component$((props: NavMenuProps) => {
                 prefetch
                 href={link.path}
                 class={[
-                  "block hover:underline hover:underline-offset-2 is-full plb-4 -mlb-4",
+                  "block hover:underline active:underline underline-offset-2 is-full plb-4 -mlb-4",
+                  "focus-visible:underline focus-visible:outline-white focus-visible:outline-offset-4",
                   "tablet:inline-block tablet:p-4 tablet:-m-4 tablet:is-max",
+                  "tablet:focus-visible:outline-peach tablet:focus-visible:outline-offset-0",
                 ]}
                 {...(location.pathname === link.path
                   ? {

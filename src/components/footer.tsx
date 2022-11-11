@@ -35,7 +35,7 @@ export const Footer = component$(() => {
         <Link
           prefetch
           href="/"
-          class={["flex justify-center", "tablet:justify-start"]}
+          class={["flex justify-center focus-visible:outline-white focus-visible:outline-offset-8", "tablet:justify-start"]}
           {...(location.pathname === "/"
             ? {
                 "aria-current": "page",
@@ -64,14 +64,14 @@ export const Footer = component$(() => {
           ]}
         >
           {links.map((link) => (
-            <li
-              key={link.path}
-              class="hover:underline hover:underline-offset-2"
-            >
+            <li key={link.path}>
               <Link
                 prefetch
                 href={link.path}
-                class="inline-block p-4 -m-4"
+                class={[
+                  "inline-block p-4 -m-4 hover:underline active:underline underline-offset-2",
+                  "focus-visible:underline focus-visible:outline-white",
+                ]}
                 {...(location.pathname === link.path
                   ? {
                       "aria-current": "page",
@@ -101,11 +101,14 @@ export const Footer = component$(() => {
           <p>
             <b>Contact Us (Central Office)</b>
             <br />P :{" "}
-            <a class="hover:underline" href="tel:+12538638967">
+            <a
+              class="hover:underline active:underline focus-visible:underline focus-visible:outline-white"
+              href="tel:+12538638967"
+            >
               +1 253-863-8967
             </a>
             <br />M :{" "}
-            <a class="hover:underline" href="mailto:contact@designo.co">
+            <a class="hover:underline active:underline focus-visible:underline focus-visible:outline-white" href="mailto:contact@designo.co">
               contact@designo.co
             </a>
           </p>
@@ -117,7 +120,10 @@ export const Footer = component$(() => {
         >
           {socials.map((social) => (
             <li key={social.path}>
-              <a href={social.path} class="inline-block p-2 -m-2">
+              <a
+                href={social.path}
+                class="inline-block p-2 -m-2 focus-visible:underline focus-visible:outline-white"
+              >
                 <span class="sr-only">{social.label}</span>
                 <img
                   src={social.icon}

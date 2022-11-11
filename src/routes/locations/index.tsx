@@ -159,13 +159,13 @@ export const LocationCard = component$((props: LocationCardProps) => {
               <b>Contact</b>
               <br />P :{" "}
               <a
-                class="hover:underline"
+                class="hover:underline active:underline"
                 href={`tel:${location.phone.replace(/\s+|\(\)-/, "")}`}
               >
                 {location.phone}
               </a>
               <br />M :{" "}
-              <a class="hover:underline" href={`mailto:${location.email}`}>
+              <a class="hover:underline active:underline" href={`mailto:${location.email}`}>
                 {location.email}
               </a>
             </p>

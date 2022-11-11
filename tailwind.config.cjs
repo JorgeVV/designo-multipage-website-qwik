@@ -2,6 +2,9 @@
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     colors: {
@@ -14,6 +17,7 @@ module.exports = {
       "dark-grey": "hsl(264, 5%, 20%)",
       "light-grey": "hsl(210, 17%, 95%)",
       transparent: "transparent",
+      currentColor: "currentColor",
     },
     fontFamily: {
       sans: ["Jost", "Jost-fallback"],
@@ -121,7 +125,7 @@ module.exports = {
     },
   },
   plugins: [
-    require("@tailwindcss/forms"),
+    require("@tailwindcss/forms")({ strategy: "class" }),
     require("tailwindcss-logical"),
     require("tailwindcss-skip-link")(),
   ],
