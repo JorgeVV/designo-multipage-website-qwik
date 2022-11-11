@@ -164,7 +164,6 @@ export interface CardProps {
 }
 
 export const Card = component$((props: CardProps) => {
-  const { title, texts, images, variant = "image-start" } = props;
   return (
     <div
       class={[
@@ -173,18 +172,18 @@ export const Card = component$((props: CardProps) => {
         {
           "image-start": "desktop:flex-row",
           "image-end": "desktop:flex-row-reverse",
-        }[variant],
+        }[props.variant ?? "image-start"],
       ]}
     >
       <picture>
         <source
-          srcSet={`${images.desktop} 1440w`}
+          srcSet={`${props.images.desktop} 1440w`}
           media="(min-width: 1440px)"
           width={476}
           height={640}
         />
         <source
-          srcSet={`${images.tablet} 768w`}
+          srcSet={`${props.images.tablet} 768w`}
           media="(min-width: 768px)"
           width={689}
           height={320}
@@ -195,8 +194,8 @@ export const Card = component$((props: CardProps) => {
             "tablet:max-bs-[50%]",
             "desktop:bs-full desktop:min-is-full desktop:basis-full desktop:max-bs-[none]",
           ]}
-          src={images.mobile}
-          srcSet={`${images.mobile} 375w`}
+          src={props.images.mobile}
+          srcSet={`${props.images.mobile} 375w`}
           alt=""
           width={375}
           height={320}
@@ -222,8 +221,8 @@ export const Card = component$((props: CardProps) => {
           height={584}
         />
         <div class="relative flex flex-col space-b-6 text-body2 tablet:text-body">
-          <h2 class="text-h3 text-peach tablet:text-h2">{title}</h2>
-          {texts.map((text) => (
+          <h2 class="text-h3 text-peach tablet:text-h2">{props.title}</h2>
+          {props.texts.map((text) => (
             <p>{text}</p>
           ))}
         </div>

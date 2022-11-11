@@ -112,8 +112,7 @@ interface NavMenuToggleLabelProps {
 
 export const NavMenuToggleLabel = component$(
   (props: NavMenuToggleLabelProps) => {
-    const { action } = props;
-    const isOpen = action === "open";
+    const isOpen = props.action === "open";
     const peerSelectorClass = isOpen
       ? "peer-checked:hidden"
       : "peer-[:not(:checked)]:hidden";
@@ -157,11 +156,10 @@ interface NavMenuProps {
 }
 
 export const NavMenu = component$((props: NavMenuProps) => {
-  const { onCloseMenu, containerRef } = props;
   const location = useLocation();
 
   useClientEffect$(({ track }) => {
-    const container = track(() => containerRef.value!);
+    const container = track(() => props.containerRef.value!);
     const isOpen = track(() => props.isMenuOpen);
     const undo: { hidden: VoidFunction | null } = { hidden: null };
 
@@ -187,7 +185,7 @@ export const NavMenu = component$((props: NavMenuProps) => {
     "resize",
     $(() => {
       if (window.innerWidth >= 768) {
-        onCloseMenu();
+        props.onCloseMenu();
       }
     })
   );
@@ -201,13 +199,13 @@ export const NavMenu = component$((props: NavMenuProps) => {
       ]}
       document:onKeyDown$={(event: KeyboardEvent) => {
         if (event.key === "Escape") {
-          onCloseMenu();
+          props.onCloseMenu();
         }
       }}
     >
       <div
         class="absolute bg-trueblack/50 inset-0 -z-10 tablet:hidden"
-        onClick$={onCloseMenu}
+        onClick$={props.onCloseMenu}
       />
       <nav
         role="navigation"
@@ -225,7 +223,7 @@ export const NavMenu = component$((props: NavMenuProps) => {
           ]}
         >
           {links.map((link) => (
-            <li key={link.path} onClick$={onCloseMenu}>
+            <li key={link.path} onClick$={props.onCloseMenu}>
               <Link
                 prefetch
                 href={link.path}

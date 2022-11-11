@@ -62,11 +62,10 @@ export const services: Array<ServiceItem> = [
 ];
 
 export const ServicesSection = component$((props: ServicesSectionProps) => {
-  const { omitService } = props;
-  const showAll = !omitService;
+  const showAll = !props.omitService;
   const servicesToDisplay = showAll
     ? services
-    : services.filter((service) => service.key !== omitService);
+    : services.filter((service) => service.key !== props.omitService);
   return (
     <Section>
       <h2 class="sr-only">Our Services</h2>

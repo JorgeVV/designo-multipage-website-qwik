@@ -7,7 +7,6 @@ export interface LinkButtonProps {
 }
 
 export const LinkButton = component$((props: LinkButtonProps) => {
-  const { href, variant = "light" } = props;
   return (
     <Link
       prefetch
@@ -18,9 +17,9 @@ export const LinkButton = component$((props: LinkButtonProps) => {
           light:
             "bg-white text-dark-grey hover:bg-light-peach active:bg-light-peach focus-visible:outline-white",
           dark: "bg-peach text-white hover:bg-light-peach active:bg-light-peach focus-visible:outline-peach",
-        }[variant],
+        }[props.variant ?? "light"],
       ]}
-      href={href}
+      href={props.href}
     >
       <Slot />
     </Link>

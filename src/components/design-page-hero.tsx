@@ -11,7 +11,6 @@ export interface DesignPageHeroProps {
 }
 
 export const DesignPageHero = component$((props: DesignPageHeroProps) => {
-  const { title, text, desktopDecoration, desktopClass } = props;
   return (
     <Section variant="full">
       <div
@@ -22,7 +21,7 @@ export const DesignPageHero = component$((props: DesignPageHeroProps) => {
       >
         <picture>
           <source
-            srcSet={`${desktopDecoration} 1440w`}
+            srcSet={`${props.desktopDecoration} 1440w`}
             media="(min-width: 1440px)"
             width={876}
             height={584}
@@ -37,7 +36,7 @@ export const DesignPageHero = component$((props: DesignPageHeroProps) => {
             class={[
               "absolute inset-0 bs-full is-full object-none object-right-top",
               "tablet:object-[18%_center]",
-              desktopClass ?? "",
+              props.desktopClass ?? "",
             ]}
             src={bgPatternMobile}
             srcSet={`${bgPatternMobile} 375w`}
@@ -53,14 +52,14 @@ export const DesignPageHero = component$((props: DesignPageHeroProps) => {
             "tablet:max-is-xl",
           ]}
         >
-          <h1 class="text-h3 tablet:text-h1">{title}</h1>
+          <h1 class="text-h3 tablet:text-h1">{props.title}</h1>
           <p
             class={[
               "text-body2 mbs-6",
               "tablet:mbs-6 tablet:text-body tablet:max-is-[444px]",
             ]}
           >
-            {text}
+            {props.text}
           </p>
         </div>
       </div>

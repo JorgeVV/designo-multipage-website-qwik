@@ -13,11 +13,10 @@ export interface ProjectsShowcaseSectionProps {
 
 export const ProjectsShowcaseSection = component$(
   (props: ProjectsShowcaseSectionProps) => {
-    const { projects } = props;
     return (
       <Section>
         <div class="grid gap-y-10 desktop:grid-cols-3 desktop:gap-8">
-          {projects.map((project) => (
+          {props.projects.map((project) => (
             <article
               key={project.title}
               class={[

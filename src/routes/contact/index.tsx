@@ -150,21 +150,13 @@ interface InputProps {
 }
 
 export const Input = component$((props: InputProps) => {
-  const {
-    label,
-    name,
-    type = "text",
-    required,
-    inputMode,
-    autoComplete,
-  } = props;
   const isBlurred = useSignal(false);
   const errorMessage = useSignal("");
   const form = useContext(formContext);
   const inputRef = useSignal<HTMLInputElement | HTMLTextAreaElement>();
-  const isTextArea = type === "textarea";
+  const isTextArea = props.type === "textarea";
   const Component = isTextArea ? "textarea" : "input";
-  const errorMessageId = `${name}-error`;
+  const errorMessageId = `${props.name}-error`;
   const showError =
     (isBlurred.value || form.triedSubmit) && !!errorMessage.value;
 
@@ -192,17 +184,17 @@ export const Input = component$((props: InputProps) => {
     <div class="relative z-0 flex items-baseline">
       <Component
         ref={inputRef}
-        name={name}
-        id={name}
+        name={props.name}
+        id={props.name}
         class={[
           "block pbe-3 pli-4 is-full text-white bg-transparent border-none appearance-none peer resize-none mbs-3",
           "focus:outline-none focus:ring-0",
           isTextArea ? "form-textarea" : "form-input",
         ]}
         placeholder=" "
-        required={required}
-        inputMode={inputMode}
-        autoComplete={autoComplete}
+        required={props.required}
+        inputMode={props.inputMode}
+        autoComplete={props.autoComplete}
         maxLength={250}
         onBlur$={() => {
           isBlurred.value = true;
@@ -213,7 +205,7 @@ export const Input = component$((props: InputProps) => {
               rows: 3,
               spellCheck: "true",
             }
-          : { type })}
+          : { type: props.type })}
         {...(showError
           ? {
               "aria-invalid": "true",
@@ -222,7 +214,7 @@ export const Input = component$((props: InputProps) => {
           : {})}
       />
       <label
-        for={name}
+        for={props.name}
         class={[
           "absolute motion-safe:duration-300 translate-x-4 scale-90 -z-10 origin-[0] transition-transform",
           "peer-focus:left-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:text-white/50 peer-focus:scale-90 peer-focus:text-white",
@@ -231,8 +223,8 @@ export const Input = component$((props: InputProps) => {
             : "block-end-3 -translate-y-4 peer-focus:-translate-y-4",
         ]}
       >
-        {label}
-        {required && <small> (required)</small>}
+        {props.label}
+        {props.required && <small> (required)</small>}
       </label>
       <p
         id={errorMessageId}

@@ -90,11 +90,10 @@ export interface LocationCardProps {
 }
 
 export const LocationCard = component$((props: LocationCardProps) => {
-  const { location, imagePriority, variant = "image-end" } = props;
   return (
     <Section variant="full">
       <div
-        id={location.key}
+        id={props.location.key}
         class={[
           "flex flex-col is-full",
           "tablet:space-b-8",
@@ -102,22 +101,22 @@ export const LocationCard = component$((props: LocationCardProps) => {
           {
             "image-start": "desktop:flex-row",
             "image-end": "desktop:flex-row-reverse desktop:space-i-reverse",
-          }[variant],
+          }[props.variant ?? "image-end"],
         ]}
       >
         <picture>
           <source
-            srcSet={`${location.map.rect} 768w`}
+            srcSet={`${props.location.map.rect} 768w`}
             media="(min-width: 768px) and (max-width: 1439.9px)"
             width={689}
             height={326}
           />
           <img
             class="tablet:rounded-2xl is-full object-cover desktop:max-bs-[326px]"
-            src={location.map.square}
+            src={props.location.map.square}
             alt=""
-            srcSet={`${location.map.square} 375w`}
-            loading={imagePriority === "high" ? "eager" : "lazy"}
+            srcSet={`${props.location.map.square} 375w`}
+            loading={props.imagePriority === "high" ? "eager" : "lazy"}
             width={375}
             height={320}
           />
@@ -140,7 +139,7 @@ export const LocationCard = component$((props: LocationCardProps) => {
             height={584}
           />
           <h2 class="relative text-peach text-h3 tablet:text-h2">
-            {location.country}
+            {props.location.country}
           </h2>
           <address
             class={[
@@ -149,24 +148,27 @@ export const LocationCard = component$((props: LocationCardProps) => {
             ]}
           >
             <p>
-              <b>{location.office}</b>
+              <b>{props.location.office}</b>
               <br />
-              {location.address1}
+              {props.location.address1}
               <br />
-              {location.address2}
+              {props.location.address2}
             </p>
             <p>
               <b>Contact</b>
               <br />P :{" "}
               <a
                 class="hover:underline active:underline"
-                href={`tel:${location.phone.replace(/\s+|\(\)-/, "")}`}
+                href={`tel:${props.location.phone.replace(/\s+|\(\)-/, "")}`}
               >
-                {location.phone}
+                {props.location.phone}
               </a>
               <br />M :{" "}
-              <a class="hover:underline active:underline" href={`mailto:${location.email}`}>
-                {location.email}
+              <a
+                class="hover:underline active:underline"
+                href={`mailto:${props.location.email}`}
+              >
+                {props.location.email}
               </a>
             </p>
           </address>
