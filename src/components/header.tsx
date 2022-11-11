@@ -87,7 +87,7 @@ export const Header = component$(() => {
           <input
             id={NAV_TOGGLE_ID}
             type="checkbox"
-            class="peer sr-only"
+            class="peer sr-only tablet:hidden"
             checked={isMenuOpen.value}
             onClick$={(event) => {
               isMenuOpen.value = (event.target as HTMLInputElement).checked;
