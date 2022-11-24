@@ -52,7 +52,7 @@ export const Hero = component$(() => {
             class={[
               "bs-full is-full object-cover",
               "tablet:max-bs-[50%]",
-              "desktop:bs-full desktop:is-full desktop:max-bs-[480px]",
+              "desktop:bs-full desktop:is-auto desktop:max-bs-[480px]",
             ]}
             src={heroImageMobile}
             srcSet={`${heroImageMobile} 375w`}
