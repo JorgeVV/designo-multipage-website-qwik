@@ -1,7 +1,7 @@
 import {
   $,
   component$,
-  createContext,
+  createContextId,
   useContext,
   useContextProvider,
   useSignal,
@@ -24,7 +24,7 @@ export default component$(() => {
   );
 });
 
-export const formContext = createContext<{
+export const formContext = createContextId<{
   noValidate: boolean;
   triedSubmit: boolean;
 }>("contactFormContext");
