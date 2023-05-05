@@ -5,7 +5,7 @@ import {
   useOnDocument,
   useOnWindow,
   useSignal,
-  useVisibleTask$,
+  useTask$,
 } from "@builder.io/qwik";
 import { Link, useLocation } from "@builder.io/qwik-city";
 import { hideOthers } from "aria-hidden";
@@ -57,7 +57,7 @@ export const Header = component$(() => {
         <div
           ref={interactiveContainerRef}
           class={[
-            "flex items-center pli-6 plb-8",
+            "flex items-center plb-8 pli-6",
             "tablet:pli-10 tablet:pbs-16",
             "desktop:pli-41",
           ]}
@@ -90,8 +90,8 @@ export const Header = component$(() => {
             type="checkbox"
             class="peer sr-only tablet:hidden"
             checked={isMenuOpen.value}
-            onClick$={(event) => {
-              isMenuOpen.value = (event.target as HTMLInputElement).checked;
+            onClick$={(_event, target) => {
+              isMenuOpen.value = target.checked;
             }}
           />
           <NavMenu
@@ -155,7 +155,7 @@ interface NavMenuProps {
 export const NavMenu = component$((props: NavMenuProps) => {
   const location = useLocation();
 
-  useVisibleTask$(({ track }) => {
+  useTask$(({ track }) => {
     const container = track(() => props.containerRef.value!);
     const isOpen = track(() => props.isMenuOpen);
 
@@ -180,6 +180,7 @@ export const NavMenu = component$((props: NavMenuProps) => {
       }
     })
   );
+
   useOnDocument(
     "onkeydown",
     $((event: Event) => {
@@ -205,8 +206,8 @@ export const NavMenu = component$((props: NavMenuProps) => {
         role="navigation"
         aria-labelledby="header-title"
         class={[
-          "bg-black -mbs-px pli-6 plb-12",
-          "tablet:bg-transparent tablet:mbs-0 tablet:pli-0 tablet:plb-0",
+          "bg-black -mbs-px plb-12 pli-6",
+          "tablet:bg-transparent tablet:mbs-0 tablet:plb-0 tablet:pli-0",
         ]}
       >
         <ul

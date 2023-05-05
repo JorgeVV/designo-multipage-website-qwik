@@ -4,6 +4,7 @@ import {
   createContextId,
   useContext,
   useContextProvider,
+  useId,
   useSignal,
   useStore,
   useTask$,
@@ -18,7 +19,7 @@ import { Section } from "~/components/section";
 export default component$(() => {
   return (
     <div class="flex flex-col pbe-32 space-b-32 desktop:pbe-40 desktop:space-b-40">
-      <ContactForm />
+      <ContactPage />
       <LocationsSection />
     </div>
   );
@@ -54,34 +55,73 @@ export const BgImage = component$(() => (
 ));
 
 export const ContactForm = component$(() => {
-  const store = useStore({ noValidate: false, triedSubmit: false });
+  const store = useStore({
+    noValidate: false,
+    triedSubmit: false,
+  });
   useContextProvider(formContext, store);
-  const formRef = useSignal<HTMLFormElement>();
 
-  useVisibleTask$(({ track }) => {
+  useVisibleTask$(() => {
     store.noValidate = true;
-    const form = track(() => formRef.value);
-    const handleSubmit = (e: SubmitEvent) => {
-      store.triedSubmit = true;
-      const form = e.target as HTMLFormElement;
-      const anyElementIsInvalid = Array.from(form.elements).find(
-        (el) => !(el as HTMLInputElement).validity.valid
-      );
-      if (anyElementIsInvalid) {
-        e.preventDefault();
-      }
-    };
-    form?.addEventListener("submit", handleSubmit);
-    return () => form?.removeEventListener("submit", handleSubmit);
   });
 
+  return (
+    <form
+      class="relative flex flex-col mbs-8 space-b-10 desktop:flex-1 desktop:mbs-0 desktop:mis-24"
+      noValidate={store.noValidate}
+      preventdefault:submit
+      onSubmit$={(_event, form) => {
+        store.triedSubmit = true;
+        const anyElementIsInvalid = Array.from(form.elements).some(
+          (el) => !(el as HTMLInputElement).validity.valid
+        );
+        if (!anyElementIsInvalid) {
+          form.submit();
+        }
+      }}
+    >
+      <div class="flex flex-col space-b-6">
+        <Input label="Name" name="name" required />
+        <Input
+          label="Email Address"
+          name="email"
+          type="email"
+          required
+          inputMode="email"
+          autoComplete="email"
+        />
+        <Input
+          label="Phone"
+          name="phone"
+          type="tel"
+          inputMode="tel"
+          autoComplete="tel"
+        />
+        <Input label="Your Message" name="message" type="textarea" required />
+      </div>
+      <button
+        type="submit"
+        class={[
+          "self-center rounded-lg text-h6 uppercase transition-colors duration-300 min-is-[152px] plb-4 pli-6 hover:text-white active:text-white",
+          "bg-white text-dark-grey hover:bg-light-peach active:bg-light-peach",
+          "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white",
+          "tablet:self-end",
+        ]}
+      >
+        Submit
+      </button>
+    </form>
+  );
+});
+
+export const ContactPage = component$(() => {
   return (
     <Section variant="full">
       <div
         class={[
-          "relative flex flex-col overflow-hidden bg-peach text-white pli-6 plb-18",
+          "relative flex flex-col overflow-hidden bg-peach text-white plb-18 pli-6",
           "tablet:rounded-2xl tablet:plb-18 tablet:pli-14",
-          "desktop:flex-row desktop:pli-24 desktop:plb-14",
+          "desktop:flex-row desktop:plb-14 desktop:pli-24",
         ]}
       >
         <BgImage />
@@ -94,48 +134,7 @@ export const ContactForm = component$(() => {
             users, drop us a line.
           </p>
         </div>
-
-        <form
-          ref={formRef}
-          class="relative flex flex-col mbs-8 space-b-10 desktop:flex-1 desktop:mbs-0 desktop:mis-24"
-          noValidate={store.noValidate}
-        >
-          <div class="flex flex-col space-b-6">
-            <Input label="Name" name="name" required />
-            <Input
-              label="Email Address"
-              name="email"
-              type="email"
-              required
-              inputMode="email"
-              autoComplete="email"
-            />
-            <Input
-              label="Phone"
-              name="phone"
-              type="tel"
-              inputMode="tel"
-              autoComplete="tel"
-            />
-            <Input
-              label="Your Message"
-              name="message"
-              type="textarea"
-              required
-            />
-          </div>
-          <button
-            type="submit"
-            class={[
-              "self-center rounded-lg text-h6 uppercase transition-colors duration-300 min-is-[152px] pli-6 plb-4 hover:text-white active:text-white",
-              "bg-white text-dark-grey hover:bg-light-peach active:bg-light-peach",
-              "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white",
-              "tablet:self-end",
-            ]}
-          >
-            Submit
-          </button>
-        </form>
+        <ContactForm />
       </div>
     </Section>
   );
@@ -157,7 +156,8 @@ export const Input = component$((props: InputProps) => {
   const inputRef = useSignal<HTMLInputElement | HTMLTextAreaElement>();
   const isTextArea = props.type === "textarea";
   const Component = isTextArea ? "textarea" : "input";
-  const errorMessageId = `${props.name}-error`;
+  const id = useId();
+  const errorMessageId = `${props.name}-error-${id}`;
   const showError =
     (isBlurred.value || form.triedSubmit) && !!errorMessage.value;
 
@@ -232,7 +232,7 @@ export const Input = component$((props: InputProps) => {
         key={errorMessage.value || undefined}
         role="alert"
         class={[
-          "hidden shrink-0 animate-fadeIn select-none items-end text-body3 text-[12px] italic tracking-normal space-i-2",
+          "hidden shrink-0 animate-fadeIn select-none items-end text-[12px] text-body3 italic tracking-normal space-i-2",
           showError ? "peer-invalid:flex" : "",
         ]}
       >
