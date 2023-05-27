@@ -2,6 +2,7 @@ import {
   $,
   component$,
   createContextId,
+  useComputed$,
   useContext,
   useContextProvider,
   useId,
@@ -28,6 +29,7 @@ export default component$(() => {
 export const formContext = createContextId<{
   noValidate: boolean;
   triedSubmit: boolean;
+  isValid: boolean;
 }>("contactFormContext");
 
 export const BgImage = component$(() => (
@@ -55,29 +57,24 @@ export const BgImage = component$(() => (
 ));
 
 export const ContactForm = component$(() => {
-  const store = useStore({
+  const formStore = useStore({
     noValidate: false,
     triedSubmit: false,
+    isValid: false,
   });
-  useContextProvider(formContext, store);
+  useContextProvider(formContext, formStore);
 
   useVisibleTask$(() => {
-    store.noValidate = true;
+    formStore.noValidate = true;
   });
 
   return (
     <form
       class="relative flex flex-col mbs-8 space-b-10 desktop:flex-1 desktop:mbs-0 desktop:mis-24"
-      noValidate={store.noValidate}
-      preventdefault:submit
-      onSubmit$={(_event, form) => {
-        store.triedSubmit = true;
-        const anyElementIsInvalid = Array.from(form.elements).some(
-          (el) => !(el as HTMLInputElement).validity.valid
-        );
-        if (!anyElementIsInvalid) {
-          form.submit();
-        }
+      noValidate={formStore.noValidate}
+      preventdefault:submit={!formStore.isValid}
+      onSubmit$={() => {
+        formStore.triedSubmit = true;
       }}
     >
       <div class="flex flex-col space-b-6">
@@ -157,22 +154,29 @@ export const Input = component$((props: InputProps) => {
   const isTextArea = props.type === "textarea";
   const Component = isTextArea ? "textarea" : "input";
   const id = useId();
-  const errorMessageId = `${props.name}-error-${id}`;
+  const errorMessageId = useComputed$(() => `${props.name}-error-${id}`);
   const showError =
     (isBlurred.value || form.triedSubmit) && !!errorMessage.value;
 
-  const handleInput = $(() => {
-    const inputEl = inputRef.value!;
-    const { validity, validationMessage } = inputEl;
-    const { valid, typeMismatch, valueMissing } = validity;
-    errorMessage.value = valid
-      ? ""
-      : typeMismatch
-      ? "Please use a valid email address"
-      : valueMissing
-      ? "Can't be empty"
-      : validationMessage;
-  });
+  const handleInput = $(
+    (_event?: Event, element?: HTMLTextAreaElement | HTMLInputElement) => {
+      const inputEl = element ?? inputRef.value;
+
+      if (!inputEl) return;
+
+      const { validity, validationMessage } = inputEl;
+      const { valid, typeMismatch, valueMissing } = validity;
+      errorMessage.value = valid
+        ? ""
+        : typeMismatch
+        ? "Please use a valid email address"
+        : valueMissing
+        ? "Can't be empty"
+        : validationMessage;
+
+      form.isValid = inputEl.form?.checkValidity() ?? false;
+    }
+  );
 
   useTask$(({ track }) => {
     const triedSubmit = track(() => form.triedSubmit);
@@ -210,7 +214,7 @@ export const Input = component$((props: InputProps) => {
         {...(showError
           ? {
               "aria-invalid": "true",
-              "aria-errormessage": errorMessageId,
+              "aria-errormessage": errorMessageId.value,
             }
           : {})}
       />
@@ -228,7 +232,7 @@ export const Input = component$((props: InputProps) => {
         {props.required && <small> (required)</small>}
       </label>
       <p
-        id={errorMessageId}
+        id={errorMessageId.value}
         key={errorMessage.value || undefined}
         role="alert"
         class={[
