@@ -156,10 +156,10 @@ export const NavMenu = component$((props: NavMenuProps) => {
   const location = useLocation();
 
   useTask$(({ track }) => {
-    const container = track(() => props.containerRef.value!);
+    const container = track(() => props.containerRef.value);
     const isOpen = track(() => props.isMenuOpen);
 
-    if (isOpen) {
+    if (isOpen && container) {
       disableBodyScroll(document.body, { reserveScrollBarGap: true });
       focusTrap.on(container);
       const undoHide = hideOthers(container);
