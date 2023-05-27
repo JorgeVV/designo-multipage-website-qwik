@@ -125,7 +125,7 @@ export const LocationCard = component$((props: LocationCardProps) => {
         <div
           class={[
             "relative overflow-hidden bg-cream text-center plb-20 pli-6 space-b-6",
-            "tablet:rounded-2xl tablet:text-start tablet:pli-18 tablet:plb-20",
+            "tablet:rounded-2xl tablet:text-start tablet:plb-20 tablet:pli-18",
             "desktop:flex-1 desktop:pli-24",
           ]}
         >

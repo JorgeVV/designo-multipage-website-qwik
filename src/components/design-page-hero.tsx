@@ -15,7 +15,7 @@ export const DesignPageHero = component$((props: DesignPageHeroProps) => {
     <Section variant="full">
       <div
         class={[
-          "relative flex flex-col items-center bg-peach is-full pli-6 plb-26",
+          "relative flex flex-col items-center bg-peach is-full plb-26 pli-6",
           "tablet:rounded-2xl tablet:plb-16 tablet:pli-14",
         ]}
       >

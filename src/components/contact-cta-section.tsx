@@ -6,7 +6,7 @@ import { Section } from "./section";
 export const ContactCtaSection = component$(() => {
   return (
     <Section wrapperElement="aside" variant="full-bleed">
-      <div class="relative mbs-32 -mbe-px tablet:mbs-17 desktop:mbs-40">
+      <div class="relative -mbe-px mbs-32 tablet:mbs-17 desktop:mbs-40">
         <div
           class={[
             "absolute -z-10 bg-black bs-1/2 inset-inline-0 block-end-0",
@@ -22,9 +22,9 @@ export const ContactCtaSection = component$(() => {
         >
           <div
             class={[
-              "relative overflow-hidden rounded-2xl bg-peach text-white pli-6 plb-16",
-              "tablet:pli-16 tablet:plb-14",
-              "desktop:pli-24 desktop:plb-18",
+              "relative overflow-hidden rounded-2xl bg-peach text-white plb-16 pli-6",
+              "tablet:plb-14 tablet:pli-16",
+              "desktop:plb-18 desktop:pli-24",
             ]}
           >
             <img

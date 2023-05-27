@@ -147,7 +147,7 @@ export const WhyDesignoSection = component$(() => {
               class={[
                 "flex flex-col space-b-12",
                 "tablet:flex-row tablet:items-center tablet:space-b-0 tablet:space-i-12",
-                "desktop:flex-1 desktop:flex-col desktop:space-i-0 desktop:space-b-12",
+                "desktop:flex-1 desktop:flex-col desktop:space-b-12 desktop:space-i-0",
               ]}
             >
               <div class={["relative flex justify-center", "tablet:shrink-0"]}>

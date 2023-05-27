@@ -27,9 +27,9 @@ export const Footer = component$(() => {
     <footer class="bg-black">
       <div
         class={[
-          "relative grid items-center gap-y-10 mli-auto pli-6 plb-16",
-          "tablet:grid-cols-3 tablet:max-is-screen-tablet tablet:pli-10 tablet:plb-20",
-          "desktop:max-is-screen-desktop desktop:pli-41 desktop:plb-18",
+          "relative grid items-center gap-y-10 mli-auto plb-16 pli-6",
+          "tablet:grid-cols-3 tablet:max-is-screen-tablet tablet:plb-20 tablet:pli-10",
+          "desktop:max-is-screen-desktop desktop:plb-18 desktop:pli-41",
         ]}
       >
         <Link

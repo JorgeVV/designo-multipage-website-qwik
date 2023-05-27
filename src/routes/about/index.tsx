@@ -65,9 +65,9 @@ export const Hero = component$(() => {
         </picture>
         <div
           class={[
-            "relative overflow-hidden bg-peach is-full pli-6 plb-20",
+            "relative overflow-hidden bg-peach is-full plb-20 pli-6",
             "tablet:plb-16 tablet:pli-14",
-            "tablet:flex-1 desktop:flex-row desktop:plb-32 desktop:pis-24 desktop:pie-20",
+            "tablet:flex-1 desktop:flex-row desktop:plb-32 desktop:pie-20 desktop:pis-24",
           ]}
         >
           <picture>
@@ -81,7 +81,7 @@ export const Hero = component$(() => {
               class={[
                 "absolute inset-0 object-none object-[100%_28%]",
                 "tablet:object-cover tablet:object-center tablet:-block-start-[440px] tablet:-inline-start-28",
-                "desktop:block-start-auto desktop:inline-start-auto desktop:block-end-0 desktop:inline-end-0",
+                "desktop:block-end-0 desktop:block-start-auto desktop:inline-end-0 desktop:inline-start-auto",
               ]}
               src={heroDecorationMobile}
               srcSet={`${heroDecorationMobile} 375w`}
@@ -209,7 +209,7 @@ export const Card = component$((props: CardProps) => {
         class={[
           "relative bg-cream text-center plb-20 pli-6",
           "tablet:plb-17 tablet:pli-17",
-          "desktop:text-start desktop:max-is-[58%] desktop:pli-24 desktop:plb-36",
+          "desktop:text-start desktop:max-is-[58%] desktop:plb-36 desktop:pli-24",
         ]}
       >
         <img
